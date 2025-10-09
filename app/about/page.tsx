@@ -6,6 +6,8 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Code as Code2, ArrowLeft, Users, Target, Award, Heart, Lightbulb, Rocket, Star, CircleCheck as CheckCircle, Globe, BookOpen, Trophy } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import headerLogo from '../../images/logo.png';
 
 const team = [
   {
@@ -104,12 +106,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
-                <Code2 className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-                StackSkills.in
-              </span>
+              <Image src={headerLogo} alt='header-logo' height={100} width={200} />
             </Link>
             <div className="flex items-center space-x-4">
               <Link href="/">

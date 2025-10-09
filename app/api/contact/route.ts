@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
@@ -24,6 +25,14 @@ export async function POST(request: Request) {
     };
 
     console.log('Contact form received:', contactData);
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail', // Replace with your email service
+      auth: {
+        user: 'stackskills.in@gmail.com', // Replace with your email
+        pass: 'dytc rvzd yeoo chjo', // Replace with your email password or app password
+      },
+    });
 
     const thankYouEmailHtml = `
       <!DOCTYPE html>
@@ -136,21 +145,32 @@ export async function POST(request: Request) {
       </html>
     `;
 
-    console.log('Contact emails prepared for:', email);
-    console.log('Admin notification prepared');
+    const thankYouEmailOptions = {
+      from: 'stackskills.in@gmail.com', // Replace with your email
+      to: email,
+      subject: 'Thank you for contacting StackSkills!',
+      html: thankYouEmailHtml,
+    };
+
+    const adminNotificationOptions = {
+      from: 'stackskills.in@gmail.com', // Replace with your email
+      to: ['info@stackskills.in', 'stackskills.in@gmail.com'], // Updated to include both emails
+      subject: 'New Contact Form Submission',
+      html: adminNotificationHtml,
+    };
+
+    await transporter.sendMail(thankYouEmailOptions);
+    await transporter.sendMail(adminNotificationOptions);
+
+    console.log('Emails sent successfully');
 
     return NextResponse.json({
       success: true,
       message: 'Thank you for contacting us! We will get back to you within 24 hours.',
       data: {
         ...contactData,
-        emailPreview: {
-          thankYou: thankYouEmailHtml,
-          adminNotification: adminNotificationHtml
-        }
-      }
+      },
     });
-
   } catch (error) {
     console.error('Contact form error:', error);
     return NextResponse.json(

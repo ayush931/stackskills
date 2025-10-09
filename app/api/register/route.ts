@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
@@ -137,21 +138,32 @@ export async function POST(request: Request) {
       </html>
     `;
 
-    console.log('Emails prepared for:', email);
-    console.log('Admin notification prepared');
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'stackskills.in@gmail.com',
+        pass: 'dytc rvzd yeoo chjo',
+      },
+    });
+
+    const adminNotificationOptions = {
+      from: 'stackskills.in@gmail.com',
+      to: 'stackskills.in@gmail.com',
+      subject: 'New Student Registration',
+      html: adminNotificationHtml,
+    };
+
+    await transporter.sendMail(adminNotificationOptions);
+
+    console.log('Admin notification email sent successfully');
 
     return NextResponse.json({
       success: true,
       message: 'Registration successful! Check your email for confirmation.',
       data: {
         ...registrationData,
-        emailPreview: {
-          thankYou: thankYouEmailHtml,
-          adminNotification: adminNotificationHtml
-        }
-      }
+      },
     });
-
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
