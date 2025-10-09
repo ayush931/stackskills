@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Code as Code2, Cpu, Rocket, Star, Users, Clock, CircleCheck as CheckCircle, ArrowRight, Play, BookOpen, Zap, Trophy, Monitor, Heart, Target, Lightbulb } from 'lucide-react';
-import Image from 'next/image';
-import headerLogo from '../images/headerLogo.png';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,15 +21,23 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <Image src={headerLogo} alt='Header logo' height={100} width={200} />
+              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
+                <Code2 className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                StackSkills.in
+              </span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#courses" className="text-gray-700 hover:text-orange-500 transition-colors">Courses</a>
+              <Link href="/courses" className="text-gray-700 hover:text-orange-500 transition-colors">Courses</Link>
               <a href="#pricing" className="text-gray-700 hover:text-orange-500 transition-colors">Pricing</a>
-              <a href="#about" className="text-gray-700 hover:text-orange-500 transition-colors">About</a>
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6">
-                Start Learning
-              </Button>
+              <Link href="/about" className="text-gray-700 hover:text-orange-500 transition-colors">About</Link>
+              <Link href="/contact" className="text-gray-700 hover:text-orange-500 transition-colors">Contact</Link>
+              <Link href="/start-learning">
+                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6">
+                  Start Learning
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -61,14 +68,18 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                  <Play className="w-5 h-5 mr-2" />
-                  Start Free Trial
-                </Button>
-                <Button variant="outline" className="border-2 border-gray-300 px-8 py-6 text-lg font-semibold rounded-xl hover:border-orange-500 hover:text-orange-500 transition-all duration-300">
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  View Courses
-                </Button>
+                <Link href="/start-learning">
+                  <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <Play className="w-5 h-5 mr-2" />
+                    Start Free Trial
+                  </Button>
+                </Link>
+                <Link href="/courses">
+                  <Button variant="outline" className="border-2 border-gray-300 px-8 py-6 text-lg font-semibold rounded-xl hover:border-orange-500 hover:text-orange-500 transition-all duration-300">
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    View Courses
+                  </Button>
+                </Link>
               </div>
 
               <div className="flex items-center space-x-8 pt-4">
@@ -371,12 +382,16 @@ export default function Home() {
               Join thousands of students already learning with StackSkills. Start your free trial today!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-orange-500 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                Start Free Trial
-              </Button>
-              <Button variant="outline" className="border-2 border-white text-black hover:bg-white hover:text-orange-500 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300">
-                Schedule Demo
-              </Button>
+              <Link href="/start-learning">
+                <Button className="bg-white text-orange-500 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                  Start Free Trial
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-orange-500 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300">
+                  Schedule Demo
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -388,7 +403,10 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <Image src={headerLogo} alt='footer logo' height={100} width={200} />
+                <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
+                  <Code2 className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-2xl font-bold">StackSkills.in</span>
               </div>
               <p className="text-gray-400">
                 Empowering young minds with coding and STEM education for a brighter future.
@@ -398,10 +416,10 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <div className="space-y-2">
-                <a href="#courses" className="block text-gray-400 hover:text-white transition-colors">Courses</a>
+                <Link href="/courses" className="block text-gray-400 hover:text-white transition-colors">Courses</Link>
                 <a href="#pricing" className="block text-gray-400 hover:text-white transition-colors">Pricing</a>
-                <a href="#about" className="block text-gray-400 hover:text-white transition-colors">About Us</a>
-                <a href="#contact" className="block text-gray-400 hover:text-white transition-colors">Contact</a>
+                <Link href="/about" className="block text-gray-400 hover:text-white transition-colors">About Us</Link>
+                <Link href="/contact" className="block text-gray-400 hover:text-white transition-colors">Contact</Link>
               </div>
             </div>
 
@@ -419,15 +437,15 @@ export default function Home() {
               <h4 className="text-lg font-semibold mb-4">Support</h4>
               <div className="space-y-2">
                 <p className="text-gray-400">Doubt Support: 9 AM - 9 PM</p>
-                <p className="text-gray-400">Email: info@stackskills.in</p>
-                <p className="text-gray-400">Phone: +91 9204334400</p>
+                <p className="text-gray-400">Email: support@stackskills.in</p>
+                <p className="text-gray-400">Phone: +91 9876543210</p>
               </div>
             </div>
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-gray-400">
-              © 2025 StackSkills.in. All rights reserved. Powered by Codementum.
+              © 2024 StackSkills.in. All rights reserved. Powered by Codementum.
             </p>
           </div>
         </div>
