@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Code as Code2, Cpu, Rocket, Star, Users, Clock, CircleCheck as CheckCircle, ArrowRight, Play, BookOpen, Zap, Trophy, Monitor, Heart, Target, Lightbulb } from 'lucide-react';
+import Image from 'next/image';
+import logoHeader from '../images/logo.png';
+import logoFooter from '../images/logo1.png';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,12 +24,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
-                <Code2 className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-                StackSkills.in
-              </span>
+              <Image src={logoHeader} alt='header-logo' height={100} width={200} />
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/courses" className="text-gray-700 hover:text-orange-500 transition-colors">Courses</Link>
@@ -122,7 +120,7 @@ export default function Home() {
                         <span className="font-semibold text-black">75%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-gradient-to-r from-orange-400 to-orange-600 h-2 rounded-full animate-pulse" style={{width: '75%'}}></div>
+                        <div className="bg-gradient-to-r from-orange-400 to-orange-600 h-2 rounded-full animate-pulse" style={{ width: '75%' }}></div>
                       </div>
                     </div>
 
@@ -299,7 +297,7 @@ export default function Home() {
               <div className="absolute top-0 right-0 bg-orange-500 text-white px-4 py-1 text-sm font-semibold">
                 Popular
               </div>
-              
+
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
@@ -388,7 +386,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-orange-500 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300">
+                <Button variant="outline" className="border-2 border-white text-black hover:bg-white hover:text-orange-500 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300">
                   Schedule Demo
                 </Button>
               </Link>
@@ -403,10 +401,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
-                  <Code2 className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-2xl font-bold">StackSkills.in</span>
+                <Image src={logoFooter} alt='footer-logo' height={100} width={200} />
               </div>
               <p className="text-gray-400">
                 Empowering young minds with coding and STEM education for a brighter future.
@@ -445,7 +440,7 @@ export default function Home() {
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-gray-400">
-              © 2024 StackSkills.in. All rights reserved. Powered by Codementum.
+              © 2025 StackSkills.in. All rights reserved. Powered by Codementum.
             </p>
           </div>
         </div>
