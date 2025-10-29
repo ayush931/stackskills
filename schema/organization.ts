@@ -1,4 +1,4 @@
-import { model, Schema, models } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const organizationSchema = new Schema({
   organizationName: {

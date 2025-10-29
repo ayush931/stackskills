@@ -1,4 +1,4 @@
-import { model, Schema, models } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const schoolSchema = new Schema({
   schoolName: {
@@ -88,5 +88,5 @@ const schoolSchema = new Schema({
   timestamps: true
 })
 
-const School = models.School || model('School', schoolSchema);
+const School = model('School', schoolSchema);
 export default School;

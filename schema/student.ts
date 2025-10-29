@@ -1,4 +1,4 @@
-import { model, Schema, models } from "mongoose";
+import { model, Schema } from "mongoose";
 
 const studentSchema = new Schema({
   fullName: {
@@ -69,5 +69,5 @@ const studentSchema = new Schema({
   timestamps: true
 })
 
-const Student = models.Student || model('Student', studentSchema);
+const Student = model('Student', studentSchema);
 export default Student;
