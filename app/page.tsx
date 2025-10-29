@@ -31,6 +31,7 @@ export default function Home() {
               <a href="#pricing" className="text-gray-700 hover:text-orange-500 transition-colors">Pricing</a>
               <Link href="/about" className="text-gray-700 hover:text-orange-500 transition-colors">About</Link>
               <Link href="/contact" className="text-gray-700 hover:text-orange-500 transition-colors">Contact</Link>
+              <Link href={"/register"} className="text-gray-700 hover:text-orange-500 transition-colors">Register</Link>
               <Link href="/start-learning">
                 <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6">
                   Start Learning
