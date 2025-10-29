@@ -30,8 +30,9 @@ export function SchoolRegistrationForm() {
 
     // Show loading toast
     toast({
-      title: "Submitting Registration...",
+      title: "⏳ Submitting Registration...",
       description: "Please wait while we process your school registration.",
+      variant: "loading" as any,
     });
 
     try {
@@ -48,9 +49,9 @@ export function SchoolRegistrationForm() {
       if (response.ok) {
         // Success toast
         toast({
-          title: "Registration Successful! 🎉",
+          title: "✅ Registration Successful!",
           description: result.message || "Your school registration has been submitted successfully. We'll contact you soon.",
-          variant: "default",
+          variant: "success" as any,
         });
 
         // Reset form
@@ -71,7 +72,7 @@ export function SchoolRegistrationForm() {
       } else {
         // Error toast with specific error message from API
         toast({
-          title: "Registration Failed",
+          title: "❌ Registration Failed",
           description: result.error || "There was an error submitting your registration. Please try again.",
           variant: "destructive",
         });
@@ -80,7 +81,7 @@ export function SchoolRegistrationForm() {
       console.error("Registration error:", error);
       // Error toast for network issues
       toast({
-        title: "Network Error",
+        title: "⚠️ Network Error",
         description: "Unable to connect to the server. Please check your internet connection and try again.",
         variant: "destructive",
       });
