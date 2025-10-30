@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   description: 'Join StackSkills for interactive coding and STEM education. Partnered with Codementum. Perfect for students from classes 4-10. Start your coding journey today!',
   keywords: 'coding for kids, STEM education, programming classes, Codementum partner, online coding school, kids programming, technology education',
   authors: [{ name: 'StackSkills' }],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
   openGraph: {
     title: 'StackSkills - Learn Coding & STEM for Kids',
     description: 'Interactive coding and STEM education for students classes 4-10. Partnered with Codementum.',
@@ -32,11 +37,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#FF6B35" />
-      </head>
       <body className={inter.className}>
         {children}
         <Toaster />
