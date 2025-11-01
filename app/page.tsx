@@ -11,19 +11,19 @@ import Image from 'next/image';
 import logoHeader from '../images/logo.png';
 import logoFooter from '../images/logo1.png';
 import popupImage from '../images/popupImage.png';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
-
-    // Show popup after a short delay
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -433,7 +433,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded-xl">
+                <Button onClick={() => router.push("https://payments.cashfree.com/forms?code=stackskills")} className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded-xl">
                   Get Started
                 </Button>
               </div>
@@ -480,7 +480,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <Button className="w-full bg-white hover:bg-gray-100 text-black py-3 text-lg font-semibold rounded-xl">
+                <Button onClick={() => router.push("https://payments.cashfree.com/forms/SSJR_Liveclasses")} className="w-full bg-white hover:bg-gray-100 text-black py-3 text-lg font-semibold rounded-xl">
                   Start Live Classes
                 </Button>
               </div>
