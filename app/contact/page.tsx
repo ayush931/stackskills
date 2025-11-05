@@ -1,10 +1,21 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Code as Code2, ArrowLeft, Mail, Phone, MapPin, Clock, Send, MessageCircle, CircleHelp as HelpCircle, Users } from 'lucide-react';
+import {
+  Code as Code2,
+  ArrowLeft,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  MessageCircle,
+  CircleHelp as HelpCircle,
+  Users,
+} from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import headerLogo from '../../images/logo.png';
@@ -12,63 +23,69 @@ import headerLogo from '../../images/logo.png';
 const contactMethods = [
   {
     icon: <Phone className="w-6 h-6" />,
-    title: "Phone Support",
-    description: "Speak directly with our support team",
-    contact: "+91 9876543210",
-    availability: "9 AM - 9 PM (Mon-Sun)",
-    color: "bg-green-500"
+    title: 'Phone Support',
+    description: 'Speak directly with our support team',
+    contact: '+91 9876543210',
+    availability: '9 AM - 9 PM (Mon-Sun)',
+    color: 'bg-green-500',
   },
   {
     icon: <Mail className="w-6 h-6" />,
-    title: "Email Support",
-    description: "Send us your queries anytime",
-    contact: "support@stackskills.in",
-    availability: "24/7 Response",
-    color: "bg-blue-500"
+    title: 'Email Support',
+    description: 'Send us your queries anytime',
+    contact: 'support@stackskills.in',
+    availability: '24/7 Response',
+    color: 'bg-blue-500',
   },
   {
     icon: <MessageCircle className="w-6 h-6" />,
-    title: "Live Chat",
-    description: "Get instant help through chat",
-    contact: "Available on website",
-    availability: "9 AM - 9 PM (Mon-Sun)",
-    color: "bg-purple-500"
+    title: 'Live Chat',
+    description: 'Get instant help through chat',
+    contact: 'Available on website',
+    availability: '9 AM - 9 PM (Mon-Sun)',
+    color: 'bg-purple-500',
   },
   {
     icon: <MapPin className="w-6 h-6" />,
-    title: "Office Address",
-    description: "Visit our headquarters",
-    contact: "Bangalore, Karnataka, India",
-    availability: "10 AM - 6 PM (Mon-Fri)",
-    color: "bg-orange-500"
-  }
+    title: 'Office Address',
+    description: 'Visit our headquarters',
+    contact: 'Bangalore, Karnataka, India',
+    availability: '10 AM - 6 PM (Mon-Fri)',
+    color: 'bg-orange-500',
+  },
 ];
 
 const faqs = [
   {
-    question: "What age group is StackSkills suitable for?",
-    answer: "StackSkills is designed for students from classes 4-10 (ages 9-16). Our curriculum is age-appropriate and progressively structured."
+    question: 'What age group is StackSkills suitable for?',
+    answer:
+      'StackSkills is designed for students from classes 4-10 (ages 9-16). Our curriculum is age-appropriate and progressively structured.',
   },
   {
-    question: "Do I need any prior coding experience?",
-    answer: "No prior experience is required! We start from the very basics and gradually build up to advanced concepts based on your grade level."
+    question: 'Do I need any prior coding experience?',
+    answer:
+      'No prior experience is required! We start from the very basics and gradually build up to advanced concepts based on your grade level.',
   },
   {
-    question: "What devices do I need for the classes?",
-    answer: "You'll need a computer/laptop with internet connection. We support Windows, Mac, and Chromebooks. Tablets can be used for some activities."
+    question: 'What devices do I need for the classes?',
+    answer:
+      "You'll need a computer/laptop with internet connection. We support Windows, Mac, and Chromebooks. Tablets can be used for some activities.",
   },
   {
-    question: "How does the free trial work?",
-    answer: "Our 7-day free trial gives you full access to our platform, live classes, and support. No credit card required to start."
+    question: 'How does the free trial work?',
+    answer:
+      'Our 7-day free trial gives you full access to our platform, live classes, and support. No credit card required to start.',
   },
   {
-    question: "Can I switch between Self Learning and Live Classes?",
-    answer: "Yes! You can upgrade or change your plan anytime. Our team will help you transition smoothly between different learning modes."
+    question: 'Can I switch between Self Learning and Live Classes?',
+    answer:
+      'Yes! You can upgrade or change your plan anytime. Our team will help you transition smoothly between different learning modes.',
   },
   {
-    question: "Do you provide certificates?",
-    answer: "Yes, we provide certificates upon successful completion of each course. These certificates showcase the skills learned and projects completed."
-  }
+    question: 'Do you provide certificates?',
+    answer:
+      'Yes, we provide certificates upon successful completion of each course. These certificates showcase the skills learned and projects completed.',
+  },
 ];
 
 export default function ContactPage() {
@@ -78,17 +95,22 @@ export default function ContactPage() {
     phone: '',
     subject: '',
     message: '',
-    inquiryType: ''
+    inquiryType: '',
   });
 
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error';
+    message: string;
+  } | null>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -112,7 +134,9 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitStatus({
           type: 'success',
-          message: result.message || 'Thank you for contacting us! We will get back to you within 24 hours.'
+          message:
+            result.message ||
+            'Thank you for contacting us! We will get back to you within 24 hours.',
         });
         setFormData({
           name: '',
@@ -120,19 +144,19 @@ export default function ContactPage() {
           phone: '',
           subject: '',
           message: '',
-          inquiryType: ''
+          inquiryType: '',
         });
       } else {
         setSubmitStatus({
           type: 'error',
-          message: result.error || 'Failed to submit form. Please try again.'
+          message: result.error || 'Failed to submit form. Please try again.',
         });
       }
     } catch (error) {
       console.error('Contact form error:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Network error. Please check your connection and try again.'
+        message: 'Network error. Please check your connection and try again.',
       });
     } finally {
       setIsSubmitting(false);
@@ -146,7 +170,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src={headerLogo} alt='Header-logo' height={100} width={200} />
+              <Image src={headerLogo} alt="Header-logo" height={100} width={200} />
             </Link>
             <div className="flex items-center space-x-4">
               <Link href="/">
@@ -169,15 +193,16 @@ export default function ContactPage() {
       <section className="pt-20 pb-12 bg-gradient-to-br from-orange-50 via-white to-orange-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-6">
-            <Badge className="bg-orange-100 text-orange-600">
-              💬 Get in Touch
-            </Badge>
+            <Badge className="bg-orange-100 text-orange-600">💬 Get in Touch</Badge>
             <h1 className="text-4xl lg:text-5xl font-bold text-black">
               We're Here to
-              <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent"> Help You</span>
+              <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                {' '}
+                Help You
+              </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Have questions about our courses, pricing, or platform? Our friendly support team is 
+              Have questions about our courses, pricing, or platform? Our friendly support team is
               ready to assist you. Reach out to us anytime!
             </p>
           </div>
@@ -190,14 +215,20 @@ export default function ContactPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-black mb-4">Multiple Ways to Reach Us</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Choose the method that works best for you. We're committed to providing quick and helpful responses.
+              Choose the method that works best for you. We're committed to providing quick and
+              helpful responses.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactMethods.map((method, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200">
-                <div className={`w-16 h-16 ${method.color} rounded-full flex items-center justify-center mx-auto mb-4 text-white`}>
+              <Card
+                key={index}
+                className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200"
+              >
+                <div
+                  className={`w-16 h-16 ${method.color} rounded-full flex items-center justify-center mx-auto mb-4 text-white`}
+                >
                   {method.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-black mb-2">{method.title}</h3>
@@ -327,11 +358,13 @@ export default function ContactPage() {
                   </div>
 
                   {submitStatus && (
-                    <div className={`p-4 rounded-lg ${
-                      submitStatus.type === 'success'
-                        ? 'bg-green-50 text-green-800 border border-green-200'
-                        : 'bg-red-50 text-red-800 border border-red-200'
-                    }`}>
+                    <div
+                      className={`p-4 rounded-lg ${
+                        submitStatus.type === 'success'
+                          ? 'bg-green-50 text-green-800 border border-green-200'
+                          : 'bg-red-50 text-red-800 border border-red-200'
+                      }`}
+                    >
                       {submitStatus.message}
                     </div>
                   )}
@@ -366,9 +399,11 @@ export default function ContactPage() {
                     >
                       <div className="flex items-center justify-between">
                         <h3 className="font-semibold text-black pr-4">{faq.question}</h3>
-                        <HelpCircle className={`w-5 h-5 text-orange-500 transform transition-transform ${
-                          expandedFaq === index ? 'rotate-180' : ''
-                        }`} />
+                        <HelpCircle
+                          className={`w-5 h-5 text-orange-500 transform transition-transform ${
+                            expandedFaq === index ? 'rotate-180' : ''
+                          }`}
+                        />
                       </div>
                     </button>
                     {expandedFaq === index && (
@@ -388,7 +423,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-black mb-2">Still have questions?</h3>
                     <p className="text-gray-600 mb-4">
-                      Our support team is here to help! Don't hesitate to reach out through any of the contact methods above.
+                      Our support team is here to help! Don't hesitate to reach out through any of
+                      the contact methods above.
                     </p>
                     <Button className="bg-orange-500 hover:bg-orange-600 text-white">
                       Contact Support

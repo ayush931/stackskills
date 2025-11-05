@@ -34,8 +34,8 @@ export async function GET(request: Request) {
         totalRecords: totalCount,
         recordsPerPage: limit,
         hasNextPage: page < Math.ceil(totalCount / limit),
-        hasPreviousPage: page > 1
-      }
+        hasPreviousPage: page > 1,
+      },
     });
   } catch (error) {
     console.error('Error fetching organizations:', error);
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       authorizedPersonName,
       authorizedPersonEmail,
       designation,
-      phoneNo
+      phoneNo,
     } = data;
 
     // Validate required fields and provide specific error messages
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
       authorizedPersonName,
       authorizedPersonEmail,
       designation,
-      phoneNo
+      phoneNo,
     });
 
     console.log('School registered:', school._id);
@@ -270,7 +270,7 @@ export async function POST(request: Request) {
         id: school._id,
         schoolName,
         schoolEmail,
-        authorizedPersonName
+        authorizedPersonName,
       },
     });
   } catch (error: any) {

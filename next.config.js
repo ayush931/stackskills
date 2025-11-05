@@ -3,9 +3,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { 
+  images: {
     unoptimized: true,
-    domains: ['images.unsplash.com', 'codementum.com']
+    domains: ['images.unsplash.com', 'codementum.com'],
   },
 };
 

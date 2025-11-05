@@ -16,7 +16,7 @@ import {
   ChevronRight,
   RefreshCw,
   Search,
-  Building
+  Building,
 } from 'lucide-react';
 
 interface School {
@@ -87,17 +87,18 @@ export default function SchoolDetailsPage() {
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
-  const filteredSchools = schools.filter(school =>
-    school.schoolName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    school.district.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    school.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    school.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    school.board.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    school.authorizedPersonName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredSchools = schools.filter(
+    (school) =>
+      school.schoolName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      school.district.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      school.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      school.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      school.board.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      school.authorizedPersonName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -136,13 +137,9 @@ export default function SchoolDetailsPage() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <GraduationCap className="h-12 w-12 text-blue-600 mr-3" />
-            <h1 className="text-4xl font-bold text-gray-900">
-              School Registrations
-            </h1>
+            <h1 className="text-4xl font-bold text-gray-900">School Registrations</h1>
           </div>
-          <p className="text-lg text-gray-600">
-            View all school partnership registrations
-          </p>
+          <p className="text-lg text-gray-600">View all school partnership registrations</p>
           {pagination && (
             <Badge variant="secondary" className="mt-4 text-base px-4 py-2">
               Total: {pagination.totalRecords} Schools
@@ -192,7 +189,10 @@ export default function SchoolDetailsPage() {
                     <Mail className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">School Email</p>
-                      <a href={`mailto:${school.schoolEmail}`} className="text-sm font-medium text-blue-600 hover:underline">
+                      <a
+                        href={`mailto:${school.schoolEmail}`}
+                        className="text-sm font-medium text-blue-600 hover:underline"
+                      >
                         {school.schoolEmail}
                       </a>
                     </div>
@@ -202,7 +202,10 @@ export default function SchoolDetailsPage() {
                     <Phone className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
-                      <a href={`tel:${school.phoneNo}`} className="text-sm font-medium text-blue-600 hover:underline">
+                      <a
+                        href={`tel:${school.phoneNo}`}
+                        className="text-sm font-medium text-blue-600 hover:underline"
+                      >
                         {school.phoneNo}
                       </a>
                     </div>
@@ -212,9 +215,7 @@ export default function SchoolDetailsPage() {
                     <Building className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Board</p>
-                      <p className="text-sm font-medium text-gray-900">
-                        {school.board}
-                      </p>
+                      <p className="text-sm font-medium text-gray-900">{school.board}</p>
                     </div>
                   </div>
 
@@ -222,9 +223,7 @@ export default function SchoolDetailsPage() {
                     <MapPin className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Address</p>
-                      <p className="text-sm font-medium text-gray-900">
-                        {school.street}
-                      </p>
+                      <p className="text-sm font-medium text-gray-900">{school.street}</p>
                       <p className="text-sm text-gray-600">
                         {school.district}, {school.city}, {school.state} - {school.pincode}
                       </p>
@@ -240,7 +239,9 @@ export default function SchoolDetailsPage() {
                     <div className="flex items-start gap-3">
                       <User className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium text-gray-900">{school.authorizedPersonName}</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {school.authorizedPersonName}
+                        </p>
                       </div>
                     </div>
 
@@ -254,7 +255,10 @@ export default function SchoolDetailsPage() {
                     <div className="flex items-start gap-3">
                       <Mail className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <a href={`mailto:${school.authorizedPersonEmail}`} className="text-sm text-blue-600 hover:underline">
+                        <a
+                          href={`mailto:${school.authorizedPersonEmail}`}
+                          className="text-sm text-blue-600 hover:underline"
+                        >
                           {school.authorizedPersonEmail}
                         </a>
                       </div>
@@ -263,7 +267,10 @@ export default function SchoolDetailsPage() {
                     <div className="flex items-start gap-3">
                       <Phone className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <a href={`tel:${school.phoneNo}`} className="text-sm text-blue-600 hover:underline">
+                        <a
+                          href={`tel:${school.phoneNo}`}
+                          className="text-sm text-blue-600 hover:underline"
+                        >
                           {school.phoneNo}
                         </a>
                       </div>
@@ -315,7 +322,11 @@ export default function SchoolDetailsPage() {
                   (pageNum >= currentPage - 1 && pageNum <= currentPage + 1);
 
                 if (!shouldShow && pageNum === 4) {
-                  return <span key={pageNum} className="px-2">...</span>;
+                  return (
+                    <span key={pageNum} className="px-2">
+                      ...
+                    </span>
+                  );
                 }
 
                 if (!shouldShow) return null;
@@ -348,7 +359,7 @@ export default function SchoolDetailsPage() {
         {/* Page Info */}
         {pagination && (
           <div className="text-center mt-6 text-sm text-gray-600">
-            Showing {((currentPage - 1) * pagination.recordsPerPage) + 1} to{' '}
+            Showing {(currentPage - 1) * pagination.recordsPerPage + 1} to{' '}
             {Math.min(currentPage * pagination.recordsPerPage, pagination.totalRecords)} of{' '}
             {pagination.totalRecords} schools
           </div>

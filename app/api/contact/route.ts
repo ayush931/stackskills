@@ -4,16 +4,11 @@ import nodemailer from 'nodemailer';
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-
     const { name, email, phone, subject, inquiryType, message } = data;
 
     if (!name || !email || !subject || !inquiryType || !message) {
-      return NextResponse.json(
-        { error: 'Required fields are missing' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Required fields are missing' }, { status: 400 });
     }
-
     const contactData = {
       name,
       email,
@@ -23,8 +18,6 @@ export async function POST(request: Request) {
       message,
       created_at: new Date().toISOString(),
     };
-
-    console.log('Contact form received:', contactData);
 
     const transporter = nodemailer.createTransport({
       service: 'gmail', // Replace with your email service
@@ -162,8 +155,6 @@ export async function POST(request: Request) {
     await transporter.sendMail(thankYouEmailOptions);
     await transporter.sendMail(adminNotificationOptions);
 
-    console.log('Emails sent successfully');
-
     return NextResponse.json({
       success: true,
       message: 'Thank you for contacting us! We will get back to you within 24 hours.',
@@ -173,9 +164,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Contact form error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process contact form' },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: 'Failed to process contact form' }, { status: 500 });
   }
 }

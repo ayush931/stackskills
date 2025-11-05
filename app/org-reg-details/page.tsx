@@ -16,7 +16,7 @@ import {
   ChevronLeft,
   ChevronRight,
   RefreshCw,
-  Search
+  Search,
 } from 'lucide-react';
 
 interface Organization {
@@ -88,15 +88,16 @@ export default function OrganizationDetailsPage() {
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
-  const filteredOrganizations = organizations.filter(org =>
-    org.organizationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    org.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    org.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    org.contactPersonName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredOrganizations = organizations.filter(
+    (org) =>
+      org.organizationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      org.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      org.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      org.contactPersonName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -133,12 +134,8 @@ export default function OrganizationDetailsPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Organization Registrations
-          </h1>
-          <p className="text-lg text-gray-600">
-            View all organization partnership registrations
-          </p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Organization Registrations</h1>
+          <p className="text-lg text-gray-600">View all organization partnership registrations</p>
           {pagination && (
             <Badge variant="secondary" className="mt-4 text-base px-4 py-2">
               Total: {pagination.totalRecords} Organizations
@@ -185,7 +182,10 @@ export default function OrganizationDetailsPage() {
                     <Mail className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Email</p>
-                      <a href={`mailto:${org.email}`} className="text-sm font-medium text-blue-600 hover:underline">
+                      <a
+                        href={`mailto:${org.email}`}
+                        className="text-sm font-medium text-blue-600 hover:underline"
+                      >
                         {org.email}
                       </a>
                     </div>
@@ -195,7 +195,10 @@ export default function OrganizationDetailsPage() {
                     <Phone className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
-                      <a href={`tel:${org.phone}`} className="text-sm font-medium text-blue-600 hover:underline">
+                      <a
+                        href={`tel:${org.phone}`}
+                        className="text-sm font-medium text-blue-600 hover:underline"
+                      >
                         {org.phone}
                       </a>
                     </div>
@@ -222,9 +225,7 @@ export default function OrganizationDetailsPage() {
                     <MapPin className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Address</p>
-                      <p className="text-sm font-medium text-gray-900">
-                        {org.address}
-                      </p>
+                      <p className="text-sm font-medium text-gray-900">{org.address}</p>
                       <p className="text-sm text-gray-600">
                         {org.city}, {org.state} - {org.pincode}
                       </p>
@@ -254,7 +255,10 @@ export default function OrganizationDetailsPage() {
                     <div className="flex items-start gap-3">
                       <Mail className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <a href={`mailto:${org.contactPersonEmail}`} className="text-sm text-blue-600 hover:underline">
+                        <a
+                          href={`mailto:${org.contactPersonEmail}`}
+                          className="text-sm text-blue-600 hover:underline"
+                        >
                           {org.contactPersonEmail}
                         </a>
                       </div>
@@ -263,7 +267,10 @@ export default function OrganizationDetailsPage() {
                     <div className="flex items-start gap-3">
                       <Phone className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                       <div>
-                        <a href={`tel:${org.contactPersonPhone}`} className="text-sm text-blue-600 hover:underline">
+                        <a
+                          href={`tel:${org.contactPersonPhone}`}
+                          className="text-sm text-blue-600 hover:underline"
+                        >
                           {org.contactPersonPhone}
                         </a>
                       </div>
@@ -333,7 +340,7 @@ export default function OrganizationDetailsPage() {
         {/* Page Info */}
         {pagination && (
           <div className="text-center mt-6 text-sm text-gray-600">
-            Showing {((currentPage - 1) * pagination.recordsPerPage) + 1} to{' '}
+            Showing {(currentPage - 1) * pagination.recordsPerPage + 1} to{' '}
             {Math.min(currentPage * pagination.recordsPerPage, pagination.totalRecords)} of{' '}
             {pagination.totalRecords} organizations
           </div>

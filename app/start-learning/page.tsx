@@ -1,10 +1,25 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Code as Code2, ArrowLeft, User, Mail, Phone, Calendar, GraduationCap, Target, CircleCheck as CheckCircle, Star, Play, BookOpen, Users, Clock } from 'lucide-react';
+import {
+  Code as Code2,
+  ArrowLeft,
+  User,
+  Mail,
+  Phone,
+  Calendar,
+  GraduationCap,
+  Target,
+  CircleCheck as CheckCircle,
+  Star,
+  Play,
+  BookOpen,
+  Users,
+  Clock,
+} from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import headerLogo from '../../images/logo.png';
@@ -12,79 +27,82 @@ import headerLogo from '../../images/logo.png';
 const learningPaths = [
   {
     id: 1,
-    title: "Beginner Path",
-    subtitle: "Perfect for Classes 4-6",
-    description: "Start your coding journey with visual programming and basic concepts",
-    courses: ["Visual Programming", "Scratch Basics", "Logic Building"],
-    duration: "6 months",
-    color: "bg-green-500",
-    icon: <Play className="w-6 h-6" />
+    title: 'Beginner Path',
+    subtitle: 'Perfect for Classes 4-6',
+    description: 'Start your coding journey with visual programming and basic concepts',
+    courses: ['Visual Programming', 'Scratch Basics', 'Logic Building'],
+    duration: '6 months',
+    color: 'bg-green-500',
+    icon: <Play className="w-6 h-6" />,
   },
   {
     id: 2,
-    title: "Intermediate Path",
-    subtitle: "Ideal for Classes 7-8",
-    description: "Advance to text-based programming and real-world applications",
-    courses: ["Python Fundamentals", "Web Basics", "Project Building"],
-    duration: "8 months",
-    color: "bg-blue-500",
-    icon: <Code2 className="w-6 h-6" />
+    title: 'Intermediate Path',
+    subtitle: 'Ideal for Classes 7-8',
+    description: 'Advance to text-based programming and real-world applications',
+    courses: ['Python Fundamentals', 'Web Basics', 'Project Building'],
+    duration: '8 months',
+    color: 'bg-blue-500',
+    icon: <Code2 className="w-6 h-6" />,
   },
   {
     id: 3,
-    title: "Advanced Path",
-    subtitle: "Designed for Classes 9-10",
-    description: "Master advanced concepts and build professional projects",
-    courses: ["Full Stack Development", "AI/ML Basics", "Advanced Projects"],
-    duration: "10 months",
-    color: "bg-purple-500",
-    icon: <GraduationCap className="w-6 h-6" />
-  }
+    title: 'Advanced Path',
+    subtitle: 'Designed for Classes 9-10',
+    description: 'Master advanced concepts and build professional projects',
+    courses: ['Full Stack Development', 'AI/ML Basics', 'Advanced Projects'],
+    duration: '10 months',
+    color: 'bg-purple-500',
+    icon: <GraduationCap className="w-6 h-6" />,
+  },
 ];
 
 const steps = [
   {
     step: 1,
-    title: "Choose Your Path",
-    description: "Select the learning path that matches your grade and experience level",
-    icon: <Target className="w-8 h-8 text-orange-500" />
+    title: 'Choose Your Path',
+    description: 'Select the learning path that matches your grade and experience level',
+    icon: <Target className="w-8 h-8 text-orange-500" />,
   },
   {
     step: 2,
-    title: "Free Trial",
-    description: "Start with a 7-day free trial to explore our platform and teaching style",
-    icon: <Play className="w-8 h-8 text-blue-500" />
+    title: 'Free Trial',
+    description: 'Start with a 7-day free trial to explore our platform and teaching style',
+    icon: <Play className="w-8 h-8 text-blue-500" />,
   },
   {
     step: 3,
-    title: "Learn & Build",
-    description: "Follow structured lessons, complete projects, and get expert guidance",
-    icon: <BookOpen className="w-8 h-8 text-green-500" />
+    title: 'Learn & Build',
+    description: 'Follow structured lessons, complete projects, and get expert guidance',
+    icon: <BookOpen className="w-8 h-8 text-green-500" />,
   },
   {
     step: 4,
-    title: "Get Certified",
-    description: "Earn certificates and showcase your skills to the world",
-    icon: <CheckCircle className="w-8 h-8 text-purple-500" />
-  }
+    title: 'Get Certified',
+    description: 'Earn certificates and showcase your skills to the world',
+    icon: <CheckCircle className="w-8 h-8 text-purple-500" />,
+  },
 ];
 
 export default function StartLearningPage() {
   const [selectedPath, setSelectedPath] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error';
+    message: string;
+  } | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     grade: '',
-    experience: ''
+    experience: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -107,7 +125,7 @@ export default function StartLearningPage() {
         },
         body: JSON.stringify({
           ...formData,
-          learningPathId: selectedPath
+          learningPathId: selectedPath,
         }),
       });
 
@@ -116,27 +134,27 @@ export default function StartLearningPage() {
       if (response.ok) {
         setSubmitStatus({
           type: 'success',
-          message: result.message || 'Registration successful! Check your email for confirmation.'
+          message: result.message || 'Registration successful! Check your email for confirmation.',
         });
         setFormData({
           name: '',
           email: '',
           phone: '',
           grade: '',
-          experience: ''
+          experience: '',
         });
         setSelectedPath(null);
       } else {
         setSubmitStatus({
           type: 'error',
-          message: result.error || 'Failed to submit registration. Please try again.'
+          message: result.error || 'Failed to submit registration. Please try again.',
         });
       }
     } catch (error) {
       console.error('Registration error:', error);
       setSubmitStatus({
         type: 'error',
-        message: 'Network error. Please check your connection and try again.'
+        message: 'Network error. Please check your connection and try again.',
       });
     } finally {
       setIsSubmitting(false);
@@ -150,7 +168,7 @@ export default function StartLearningPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src={headerLogo} height={100} width={200} alt='header-logo' />
+              <Image src={headerLogo} height={100} width={200} alt="header-logo" />
             </Link>
             <Link href="/">
               <Button variant="outline" className="flex items-center space-x-2">
@@ -166,15 +184,16 @@ export default function StartLearningPage() {
       <section className="pt-20 pb-12 bg-gradient-to-br from-orange-50 via-white to-orange-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-6">
-            <Badge className="bg-orange-100 text-orange-600">
-              🚀 Start Your Journey
-            </Badge>
+            <Badge className="bg-orange-100 text-orange-600">🚀 Start Your Journey</Badge>
             <h1 className="text-4xl lg:text-5xl font-bold text-black">
               Begin Your Coding
-              <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent"> Adventure</span>
+              <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                {' '}
+                Adventure
+              </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Choose your learning path, start with a free trial, and join thousands of students 
+              Choose your learning path, start with a free trial, and join thousands of students
               already mastering coding and STEM skills with StackSkills.
             </p>
           </div>
@@ -193,7 +212,10 @@ export default function StartLearningPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
-              <Card key={step.step} className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200">
+              <Card
+                key={step.step}
+                className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200"
+              >
                 <div className="relative">
                   <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                     {step.icon}
@@ -225,20 +247,24 @@ export default function StartLearningPage() {
               <Card
                 key={path.id}
                 className={`p-6 cursor-pointer transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl border-2 ${
-                  selectedPath === path.id ? 'border-orange-500 bg-orange-50' : 'hover:border-orange-200'
+                  selectedPath === path.id
+                    ? 'border-orange-500 bg-orange-50'
+                    : 'hover:border-orange-200'
                 }`}
                 onClick={() => setSelectedPath(path.id)}
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className={`w-12 h-12 ${path.color} rounded-xl flex items-center justify-center text-white`}>
+                    <div
+                      className={`w-12 h-12 ${path.color} rounded-xl flex items-center justify-center text-white`}
+                    >
                       {path.icon}
                     </div>
                     {selectedPath === path.id && (
                       <CheckCircle className="w-6 h-6 text-orange-500" />
                     )}
                   </div>
-                  
+
                   <div>
                     <h3 className="text-xl font-bold text-black mb-1">{path.title}</h3>
                     <Badge className="bg-gray-100 text-gray-600 mb-3">{path.subtitle}</Badge>
@@ -250,12 +276,15 @@ export default function StartLearningPage() {
                       <span className="text-gray-500">Duration:</span>
                       <span className="font-semibold text-black">{path.duration}</span>
                     </div>
-                    
+
                     <div>
                       <h4 className="font-semibold text-black mb-2">Included Courses:</h4>
                       <div className="space-y-1">
                         {path.courses.map((course, index) => (
-                          <div key={index} className="flex items-center space-x-2 text-sm text-gray-600">
+                          <div
+                            key={index}
+                            className="flex items-center space-x-2 text-sm text-gray-600"
+                          >
                             <CheckCircle className="w-4 h-4 text-green-500" />
                             <span>{course}</span>
                           </div>
@@ -376,11 +405,13 @@ export default function StartLearningPage() {
                 </div>
 
                 {submitStatus && (
-                  <div className={`p-4 rounded-lg ${
-                    submitStatus.type === 'success'
-                      ? 'bg-green-50 text-green-800 border border-green-200'
-                      : 'bg-red-50 text-red-800 border border-red-200'
-                  }`}>
+                  <div
+                    className={`p-4 rounded-lg ${
+                      submitStatus.type === 'success'
+                        ? 'bg-green-50 text-green-800 border border-green-200'
+                        : 'bg-red-50 text-red-800 border border-red-200'
+                    }`}
+                  >
                     {submitStatus.message}
                   </div>
                 )}
@@ -404,15 +435,17 @@ export default function StartLearningPage() {
             {/* Benefits */}
             <div className="space-y-6">
               <Card className="p-6 bg-gradient-to-br from-orange-50 to-yellow-50 border-orange-200">
-                <h3 className="text-xl font-bold text-black mb-4">What's Included in Your Free Trial</h3>
+                <h3 className="text-xl font-bold text-black mb-4">
+                  What's Included in Your Free Trial
+                </h3>
                 <div className="space-y-3">
                   {[
-                    "Access to all course materials",
-                    "Live interactive sessions",
-                    "1-on-1 doubt support",
-                    "Project-based learning",
-                    "Expert instructor guidance",
-                    "Certificate upon completion"
+                    'Access to all course materials',
+                    'Live interactive sessions',
+                    '1-on-1 doubt support',
+                    'Project-based learning',
+                    'Expert instructor guidance',
+                    'Certificate upon completion',
                   ].map((benefit, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-5 h-5 text-green-500" />

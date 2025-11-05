@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import headerLogo from '../../images/logo.png';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SchoolRegistrationForm } from "@/components/forms/SchoolRegistration";
-import { StudentRegistrationForm } from "@/components/forms/StudentRegistration";
-import { OrganizationRegistrationForm } from "@/components/forms/OrganizationRegistration";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { SchoolRegistrationForm } from '@/components/forms/SchoolRegistration';
+import { StudentRegistrationForm } from '@/components/forms/StudentRegistration';
+import { OrganizationRegistrationForm } from '@/components/forms/OrganizationRegistration';
 
 export default function Register() {
   return (
@@ -17,7 +17,7 @@ export default function Register() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src={headerLogo} alt='header-logo' height={100} width={200} />
+              <Image src={headerLogo} alt="header-logo" height={100} width={200} />
             </Link>
             <div className="flex items-center space-x-4">
               <Link href="/">
@@ -80,5 +80,5 @@ export default function Register() {
         </div>
       </div>
     </div>
-  )
+  );
 }

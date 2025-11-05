@@ -17,7 +17,7 @@ import {
   GraduationCap,
   School,
   Cake,
-  UserCircle
+  UserCircle,
 } from 'lucide-react';
 
 interface Student {
@@ -90,7 +90,7 @@ export default function StudentDetailsPage() {
       month: 'long',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
@@ -98,7 +98,7 @@ export default function StudentDetailsPage() {
     return new Date(dateString).toLocaleDateString('en-IN', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -113,13 +113,14 @@ export default function StudentDetailsPage() {
     return age;
   };
 
-  const filteredStudents = students.filter(student =>
-    student.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.school.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (student.parentName && student.parentName.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredStudents = students.filter(
+    (student) =>
+      student.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.school.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (student.parentName && student.parentName.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   if (loading) {
@@ -158,13 +159,9 @@ export default function StudentDetailsPage() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <Users className="h-12 w-12 text-purple-600 mr-3" />
-            <h1 className="text-4xl font-bold text-gray-900">
-              Student Registrations
-            </h1>
+            <h1 className="text-4xl font-bold text-gray-900">Student Registrations</h1>
           </div>
-          <p className="text-lg text-gray-600">
-            View all student registrations
-          </p>
+          <p className="text-lg text-gray-600">View all student registrations</p>
           {pagination && (
             <Badge variant="secondary" className="mt-4 text-base px-4 py-2">
               Total: {pagination.totalRecords} Students
@@ -215,7 +212,10 @@ export default function StudentDetailsPage() {
                       <Mail className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="text-sm text-gray-500">Email</p>
-                        <a href={`mailto:${student.email}`} className="text-sm font-medium text-purple-600 hover:underline">
+                        <a
+                          href={`mailto:${student.email}`}
+                          className="text-sm font-medium text-purple-600 hover:underline"
+                        >
                           {student.email}
                         </a>
                       </div>
@@ -226,7 +226,10 @@ export default function StudentDetailsPage() {
                     <Phone className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
-                      <a href={`tel:${student.phone}`} className="text-sm font-medium text-purple-600 hover:underline">
+                      <a
+                        href={`tel:${student.phone}`}
+                        className="text-sm font-medium text-purple-600 hover:underline"
+                      >
                         {student.phone}
                       </a>
                     </div>
@@ -247,9 +250,7 @@ export default function StudentDetailsPage() {
                       <UserCircle className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="text-sm text-gray-500">Gender</p>
-                        <p className="text-sm font-medium text-gray-900">
-                          {student.gender}
-                        </p>
+                        <p className="text-sm font-medium text-gray-900">{student.gender}</p>
                       </div>
                     </div>
                   )}
@@ -258,9 +259,7 @@ export default function StudentDetailsPage() {
                     <School className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">School</p>
-                      <p className="text-sm font-medium text-gray-900">
-                        {student.school}
-                      </p>
+                      <p className="text-sm font-medium text-gray-900">{student.school}</p>
                     </div>
                   </div>
 
@@ -268,9 +267,7 @@ export default function StudentDetailsPage() {
                     <GraduationCap className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Grade</p>
-                      <p className="text-sm font-medium text-gray-900">
-                        {student.grade}
-                      </p>
+                      <p className="text-sm font-medium text-gray-900">{student.grade}</p>
                     </div>
                   </div>
 
@@ -278,9 +275,7 @@ export default function StudentDetailsPage() {
                     <MapPin className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-gray-500">Address</p>
-                      <p className="text-sm font-medium text-gray-900">
-                        {student.address}
-                      </p>
+                      <p className="text-sm font-medium text-gray-900">{student.address}</p>
                       <p className="text-sm text-gray-600">
                         {student.city}, {student.state} - {student.pincode}
                       </p>
@@ -291,7 +286,9 @@ export default function StudentDetailsPage() {
                 {/* Parent Info - Only show if at least one parent field exists */}
                 {(student.parentName || student.parentPhone || student.parentEmail) && (
                   <div className="border-t pt-4">
-                    <p className="text-sm font-semibold text-gray-700 mb-3">Parent/Guardian Information</p>
+                    <p className="text-sm font-semibold text-gray-700 mb-3">
+                      Parent/Guardian Information
+                    </p>
 
                     <div className="space-y-3">
                       {student.parentName && (
@@ -299,7 +296,9 @@ export default function StudentDetailsPage() {
                           <UserCircle className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="text-sm text-gray-500">Name</p>
-                            <p className="text-sm font-medium text-gray-900">{student.parentName}</p>
+                            <p className="text-sm font-medium text-gray-900">
+                              {student.parentName}
+                            </p>
                           </div>
                         </div>
                       )}
@@ -309,7 +308,10 @@ export default function StudentDetailsPage() {
                           <Phone className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="text-sm text-gray-500">Phone</p>
-                            <a href={`tel:${student.parentPhone}`} className="text-sm text-purple-600 hover:underline">
+                            <a
+                              href={`tel:${student.parentPhone}`}
+                              className="text-sm text-purple-600 hover:underline"
+                            >
                               {student.parentPhone}
                             </a>
                           </div>
@@ -321,7 +323,10 @@ export default function StudentDetailsPage() {
                           <Mail className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="text-sm text-gray-500">Email</p>
-                            <a href={`mailto:${student.parentEmail}`} className="text-sm text-purple-600 hover:underline">
+                            <a
+                              href={`mailto:${student.parentEmail}`}
+                              className="text-sm text-purple-600 hover:underline"
+                            >
                               {student.parentEmail}
                             </a>
                           </div>
@@ -374,7 +379,11 @@ export default function StudentDetailsPage() {
                   (pageNum >= currentPage - 1 && pageNum <= currentPage + 1);
 
                 if (!shouldShow && pageNum === 4) {
-                  return <span key={pageNum} className="px-2">...</span>;
+                  return (
+                    <span key={pageNum} className="px-2">
+                      ...
+                    </span>
+                  );
                 }
 
                 if (!shouldShow) return null;
@@ -407,7 +416,7 @@ export default function StudentDetailsPage() {
         {/* Page Info */}
         {pagination && (
           <div className="text-center mt-6 text-sm text-gray-600">
-            Showing {((currentPage - 1) * pagination.recordsPerPage) + 1} to{' '}
+            Showing {(currentPage - 1) * pagination.recordsPerPage + 1} to{' '}
             {Math.min(currentPage * pagination.recordsPerPage, pagination.totalRecords)} of{' '}
             {pagination.totalRecords} students
           </div>

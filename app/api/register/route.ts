@@ -8,10 +8,7 @@ export async function POST(request: Request) {
     const { name, email, phone, grade, experience, learningPathId } = data;
 
     if (!name || !email || !phone || !grade || !experience || !learningPathId) {
-      return NextResponse.json(
-        { error: 'All fields are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
     const registrationData = {
@@ -166,9 +163,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Registration error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process registration' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to process registration' }, { status: 500 });
   }
 }

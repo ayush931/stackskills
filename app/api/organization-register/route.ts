@@ -34,8 +34,8 @@ export async function GET(request: Request) {
         totalRecords: totalCount,
         recordsPerPage: limit,
         hasNextPage: page < Math.ceil(totalCount / limit),
-        hasPreviousPage: page > 1
-      }
+        hasPreviousPage: page > 1,
+      },
     });
   } catch (error) {
     console.error('Error fetching organizations:', error);
@@ -63,15 +63,24 @@ export async function POST(request: Request) {
       contactPersonName,
       contactPersonDesignation,
       contactPersonEmail,
-      contactPersonPhone
+      contactPersonPhone,
     } = data;
 
     // Validate required fields
-    if (!organizationName || !email || !phone || !address || !city || !state || !pincode || !contactPersonName || !contactPersonDesignation || !contactPersonEmail || !contactPersonPhone) {
-      return NextResponse.json(
-        { error: 'All required fields must be filled' },
-        { status: 400 }
-      );
+    if (
+      !organizationName ||
+      !email ||
+      !phone ||
+      !address ||
+      !city ||
+      !state ||
+      !pincode ||
+      !contactPersonName ||
+      !contactPersonDesignation ||
+      !contactPersonEmail ||
+      !contactPersonPhone
+    ) {
+      return NextResponse.json({ error: 'All required fields must be filled' }, { status: 400 });
     }
 
     // Connect to database
@@ -91,7 +100,7 @@ export async function POST(request: Request) {
       contactPersonName,
       contactPersonDesignation,
       contactPersonEmail,
-      contactPersonPhone
+      contactPersonPhone,
     });
 
     console.log('Organization registered:', organization._id);
@@ -189,10 +198,14 @@ export async function POST(request: Request) {
               <td class="label">Organization Name:</td>
               <td>${organizationName}</td>
             </tr>
-            ${organizationType ? `<tr>
+            ${
+              organizationType
+                ? `<tr>
               <td class="label">Organization Type:</td>
               <td>${organizationType}</td>
-            </tr>` : ''}
+            </tr>`
+                : ''
+            }
             <tr>
               <td class="label">Email:</td>
               <td>${email}</td>
@@ -201,10 +214,14 @@ export async function POST(request: Request) {
               <td class="label">Phone:</td>
               <td>${phone}</td>
             </tr>
-            ${website ? `<tr>
+            ${
+              website
+                ? `<tr>
               <td class="label">Website:</td>
               <td><a href="${website}">${website}</a></td>
-            </tr>` : ''}
+            </tr>`
+                : ''
+            }
             <tr>
               <td class="label">Full Address:</td>
               <td>${address}, ${city}, ${state} - ${pincode}</td>
@@ -260,7 +277,7 @@ export async function POST(request: Request) {
         id: organization._id,
         organizationName,
         email,
-        contactPersonName
+        contactPersonName,
       },
     });
   } catch (error) {

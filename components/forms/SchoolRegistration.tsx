@@ -1,27 +1,27 @@
 // filepath: /home/ayush/code/stackskills/components/forms/SchoolRegistrationForm.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { Loader2 } from 'lucide-react';
 
 export function SchoolRegistrationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    schoolName: "",
-    schoolEmail: "",
-    district: "",
-    street: "",
-    city: "",
-    state: "",
-    pincode: "",
-    board: "",
-    authorizedPersonName: "",
-    authorizedPersonEmail: "",
-    designation: "",
-    phoneNo: "",
+    schoolName: '',
+    schoolEmail: '',
+    district: '',
+    street: '',
+    city: '',
+    state: '',
+    pincode: '',
+    board: '',
+    authorizedPersonName: '',
+    authorizedPersonEmail: '',
+    designation: '',
+    phoneNo: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,16 +30,16 @@ export function SchoolRegistrationForm() {
 
     // Show loading toast
     toast({
-      title: "⏳ Submitting Registration...",
-      description: "Please wait while we process your school registration.",
-      variant: "loading" as any,
+      title: '⏳ Submitting Registration...',
+      description: 'Please wait while we process your school registration.',
+      variant: 'loading' as any,
     });
 
     try {
-      const response = await fetch("/api/school-register", {
-        method: "POST",
+      const response = await fetch('/api/school-register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -49,41 +49,45 @@ export function SchoolRegistrationForm() {
       if (response.ok) {
         // Success toast
         toast({
-          title: "✅ Registration Successful!",
-          description: result.message || "Your school registration has been submitted successfully. We'll contact you soon.",
-          variant: "success" as any,
+          title: '✅ Registration Successful!',
+          description:
+            result.message ||
+            "Your school registration has been submitted successfully. We'll contact you soon.",
+          variant: 'success' as any,
         });
 
         // Reset form
         setFormData({
-          schoolName: "",
-          schoolEmail: "",
-          district: "",
-          street: "",
-          city: "",
-          state: "",
-          pincode: "",
-          board: "",
-          authorizedPersonName: "",
-          authorizedPersonEmail: "",
-          designation: "",
-          phoneNo: "",
+          schoolName: '',
+          schoolEmail: '',
+          district: '',
+          street: '',
+          city: '',
+          state: '',
+          pincode: '',
+          board: '',
+          authorizedPersonName: '',
+          authorizedPersonEmail: '',
+          designation: '',
+          phoneNo: '',
         });
       } else {
         // Error toast with specific error message from API
         toast({
-          title: "❌ Registration Failed",
-          description: result.error || "There was an error submitting your registration. Please try again.",
-          variant: "destructive",
+          title: '❌ Registration Failed',
+          description:
+            result.error || 'There was an error submitting your registration. Please try again.',
+          variant: 'destructive',
         });
       }
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error('Registration error:', error);
       // Error toast for network issues
       toast({
-        title: "⚠️ Network Error",
-        description: "Unable to connect to the server. Please check your internet connection and try again.",
-        variant: "destructive",
+        title: '⚠️ Network Error',
+        description:
+          'Unable to connect to the server. Please check your internet connection and try again.',
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
@@ -253,7 +257,7 @@ export function SchoolRegistrationForm() {
             Submitting...
           </>
         ) : (
-          "Register School"
+          'Register School'
         )}
       </Button>
     </form>

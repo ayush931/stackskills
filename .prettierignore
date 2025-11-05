@@ -1,0 +1,39 @@
+# Ignore node deps
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output
+dist
+build
+.out
+.next
+coverage
+
+# Env files
+.env
+.env.*             # .env.local, .env.production, etc.
+
+# System / Editor files
+.DS_Store
+.vscode
+.idea
+
+# Logs
+*.log
+
+# Ignore compiled assets
+*.min.js
+*.min.css
+
+# Ignore generated files
+public/**/*.svg
+public/**/*.png
+public/**/*.jpg
+
+# If using Prisma
+prisma/generated
+
+# If using Turbo / Monorepo
+turbo

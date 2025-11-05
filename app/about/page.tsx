@@ -1,101 +1,123 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Code as Code2, ArrowLeft, Users, Target, Award, Heart, Lightbulb, Rocket, Star, CircleCheck as CheckCircle, Globe, BookOpen, Trophy } from 'lucide-react';
+import {
+  Code as Code2,
+  ArrowLeft,
+  Users,
+  Target,
+  Award,
+  Heart,
+  Lightbulb,
+  Rocket,
+  Star,
+  CircleCheck as CheckCircle,
+  Globe,
+  BookOpen,
+  Trophy,
+} from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import headerLogo from '../../images/logo.png';
 
 const team = [
   {
-    name: "Dr. Priya Sharma",
-    role: "Founder & CEO",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-    description: "Former Google engineer with 15+ years in EdTech",
-    expertise: ["AI/ML", "Product Strategy", "EdTech Innovation"]
+    name: 'Dr. Priya Sharma',
+    role: 'Founder & CEO',
+    image:
+      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face',
+    description: 'Former Google engineer with 15+ years in EdTech',
+    expertise: ['AI/ML', 'Product Strategy', 'EdTech Innovation'],
   },
   {
-    name: "Rahul Kumar",
-    role: "Head of Curriculum",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-    description: "Ex-Microsoft developer, passionate about teaching kids",
-    expertise: ["Python", "Web Development", "Curriculum Design"]
+    name: 'Rahul Kumar',
+    role: 'Head of Curriculum',
+    image:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face',
+    description: 'Ex-Microsoft developer, passionate about teaching kids',
+    expertise: ['Python', 'Web Development', 'Curriculum Design'],
   },
   {
-    name: "Anita Patel",
-    role: "Lead Instructor",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-    description: "10+ years teaching experience, child psychology expert",
-    expertise: ["Scratch", "Robotics", "Child Psychology"]
+    name: 'Anita Patel',
+    role: 'Lead Instructor',
+    image:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face',
+    description: '10+ years teaching experience, child psychology expert',
+    expertise: ['Scratch', 'Robotics', 'Child Psychology'],
   },
   {
-    name: "Vikram Singh",
-    role: "Technology Director",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    description: "Full-stack developer, platform architecture specialist",
-    expertise: ["Platform Development", "System Architecture", "DevOps"]
-  }
+    name: 'Vikram Singh',
+    role: 'Technology Director',
+    image:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face',
+    description: 'Full-stack developer, platform architecture specialist',
+    expertise: ['Platform Development', 'System Architecture', 'DevOps'],
+  },
 ];
 
 const values = [
   {
     icon: <Heart className="w-8 h-8 text-red-500" />,
-    title: "Student-First Approach",
-    description: "Every decision we make is centered around what's best for our students' learning journey."
+    title: 'Student-First Approach',
+    description:
+      "Every decision we make is centered around what's best for our students' learning journey.",
   },
   {
     icon: <Lightbulb className="w-8 h-8 text-yellow-500" />,
-    title: "Innovation in Learning",
-    description: "We constantly innovate our teaching methods to make learning engaging and effective."
+    title: 'Innovation in Learning',
+    description:
+      'We constantly innovate our teaching methods to make learning engaging and effective.',
   },
   {
     icon: <Users className="w-8 h-8 text-blue-500" />,
-    title: "Community Building",
-    description: "We foster a supportive community where students learn from each other and grow together."
+    title: 'Community Building',
+    description:
+      'We foster a supportive community where students learn from each other and grow together.',
   },
   {
     icon: <Target className="w-8 h-8 text-green-500" />,
-    title: "Goal-Oriented Learning",
-    description: "We help students set and achieve clear, measurable learning goals through structured programs."
-  }
+    title: 'Goal-Oriented Learning',
+    description:
+      'We help students set and achieve clear, measurable learning goals through structured programs.',
+  },
 ];
 
 const achievements = [
-  { number: "5000+", label: "Students Taught", icon: <Users className="w-6 h-6" /> },
-  { number: "50+", label: "Expert Instructors", icon: <Award className="w-6 h-6" /> },
-  { number: "95%", label: "Success Rate", icon: <Trophy className="w-6 h-6" /> },
-  { number: "4.9/5", label: "Student Rating", icon: <Star className="w-6 h-6" /> }
+  { number: '5000+', label: 'Students Taught', icon: <Users className="w-6 h-6" /> },
+  { number: '50+', label: 'Expert Instructors', icon: <Award className="w-6 h-6" /> },
+  { number: '95%', label: 'Success Rate', icon: <Trophy className="w-6 h-6" /> },
+  { number: '4.9/5', label: 'Student Rating', icon: <Star className="w-6 h-6" /> },
 ];
 
 const milestones = [
   {
-    year: "2020",
-    title: "StackSkills Founded",
-    description: "Started with a vision to make coding accessible to every child in India"
+    year: '2020',
+    title: 'StackSkills Founded',
+    description: 'Started with a vision to make coding accessible to every child in India',
   },
   {
-    year: "2021",
-    title: "Partnership with Codementum",
-    description: "Joined forces with Codementum to enhance our curriculum and reach"
+    year: '2021',
+    title: 'Partnership with Codementum',
+    description: 'Joined forces with Codementum to enhance our curriculum and reach',
   },
   {
-    year: "2022",
-    title: "1000+ Students Milestone",
-    description: "Reached our first major milestone of teaching 1000+ students"
+    year: '2022',
+    title: '1000+ Students Milestone',
+    description: 'Reached our first major milestone of teaching 1000+ students',
   },
   {
-    year: "2023",
-    title: "National Recognition",
-    description: "Awarded 'Best EdTech Platform for Kids' by Education Excellence Awards"
+    year: '2023',
+    title: 'National Recognition',
+    description: "Awarded 'Best EdTech Platform for Kids' by Education Excellence Awards",
   },
   {
-    year: "2024",
-    title: "5000+ Students & Growing",
-    description: "Expanded to serve 5000+ students across India with 95% success rate"
-  }
+    year: '2024',
+    title: '5000+ Students & Growing',
+    description: 'Expanded to serve 5000+ students across India with 95% success rate',
+  },
 ];
 
 export default function AboutPage() {
@@ -106,7 +128,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src={headerLogo} alt='header-logo' height={100} width={200} />
+              <Image src={headerLogo} alt="header-logo" height={100} width={200} />
             </Link>
             <div className="flex items-center space-x-4">
               <Link href="/">
@@ -129,16 +151,18 @@ export default function AboutPage() {
       <section className="pt-20 pb-16 bg-gradient-to-br from-orange-50 via-white to-orange-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-6">
-            <Badge className="bg-orange-100 text-orange-600">
-              🌟 About StackSkills
-            </Badge>
+            <Badge className="bg-orange-100 text-orange-600">🌟 About StackSkills</Badge>
             <h1 className="text-4xl lg:text-5xl font-bold text-black">
               Empowering Young Minds with
-              <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent"> Technology</span>
+              <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                {' '}
+                Technology
+              </span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're on a mission to make coding and STEM education accessible, engaging, and effective 
-              for every child. Partnered with Codementum, we're building the future of education.
+              We're on a mission to make coding and STEM education accessible, engaging, and
+              effective for every child. Partnered with Codementum, we're building the future of
+              education.
             </p>
           </div>
         </div>
@@ -152,16 +176,17 @@ export default function AboutPage() {
               <div>
                 <h2 className="text-3xl font-bold text-black mb-4">Our Mission</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  To democratize coding and STEM education by making it accessible, affordable, and engaging 
-                  for students from classes 4-10. We believe every child deserves the opportunity to learn 
-                  the skills that will shape their future.
+                  To democratize coding and STEM education by making it accessible, affordable, and
+                  engaging for students from classes 4-10. We believe every child deserves the
+                  opportunity to learn the skills that will shape their future.
                 </p>
               </div>
               <div>
                 <h2 className="text-3xl font-bold text-black mb-4">Our Vision</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  To become India's leading EdTech platform for young learners, creating a generation of 
-                  confident, creative, and capable digital natives who can solve tomorrow's challenges.
+                  To become India's leading EdTech platform for young learners, creating a
+                  generation of confident, creative, and capable digital natives who can solve
+                  tomorrow's challenges.
                 </p>
               </div>
             </div>
@@ -169,7 +194,10 @@ export default function AboutPage() {
               <div className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-3xl p-8">
                 <div className="grid grid-cols-2 gap-6">
                   {achievements.map((achievement, index) => (
-                    <Card key={index} className="p-4 text-center hover:shadow-lg transition-all duration-300">
+                    <Card
+                      key={index}
+                      className="p-4 text-center hover:shadow-lg transition-all duration-300"
+                    >
                       <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2 text-orange-500">
                         {achievement.icon}
                       </div>
@@ -190,14 +218,17 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-black mb-4">Our Core Values</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              These values guide everything we do and shape how we interact with our students, 
+              These values guide everything we do and shape how we interact with our students,
               parents, and the broader community.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200">
+              <Card
+                key={index}
+                className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200"
+              >
                 <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                   {value.icon}
                 </div>
@@ -223,8 +254,13 @@ export default function AboutPage() {
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-orange-200"></div>
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
-                <div key={index} className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                <div
+                  key={index}
+                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                >
+                  <div
+                    className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}
+                  >
                     <Card className="p-6 hover:shadow-lg transition-all duration-300">
                       <Badge className="bg-orange-100 text-orange-600 mb-2">{milestone.year}</Badge>
                       <h3 className="text-xl font-bold text-black mb-2">{milestone.title}</h3>
@@ -248,14 +284,17 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-black mb-4">Meet Our Team</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our passionate team of educators, developers, and child psychology experts work together 
-              to create the best learning experience for your child.
+              Our passionate team of educators, developers, and child psychology experts work
+              together to create the best learning experience for your child.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2">
+              <Card
+                key={index}
+                className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2"
+              >
                 <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden bg-gray-200">
                   <div className="w-full h-full bg-gradient-to-br from-orange-200 to-orange-300 flex items-center justify-center">
                     <Users className="w-12 h-12 text-orange-600" />
@@ -283,7 +322,8 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-black mb-4">Our Partnership</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We're proud to partner with Codementum to bring world-class coding education to Indian students.
+              We're proud to partner with Codementum to bring world-class coding education to Indian
+              students.
             </p>
           </div>
 
@@ -300,16 +340,16 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Through our strategic partnership with Codementum, we leverage their proven curriculum, 
-                  advanced learning platform, and global expertise to deliver exceptional coding education 
-                  tailored for Indian students.
+                  Through our strategic partnership with Codementum, we leverage their proven
+                  curriculum, advanced learning platform, and global expertise to deliver
+                  exceptional coding education tailored for Indian students.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    "World-class curriculum",
-                    "Advanced learning platform",
-                    "Global best practices",
-                    "Continuous innovation"
+                    'World-class curriculum',
+                    'Advanced learning platform',
+                    'Global best practices',
+                    'Continuous innovation',
                   ].map((benefit, index) => (
                     <div key={index} className="flex items-center space-x-2">
                       <CheckCircle className="w-5 h-5 text-green-500" />
@@ -358,7 +398,8 @@ export default function AboutPage() {
               Ready to Join Our Learning Community?
             </h2>
             <p className="text-xl text-orange-100">
-              Become part of the StackSkills family and give your child the gift of coding and STEM education.
+              Become part of the StackSkills family and give your child the gift of coding and STEM
+              education.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/start-learning">
@@ -367,7 +408,10 @@ export default function AboutPage() {
                 </Button>
               </Link>
               <Link href="/courses">
-                <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-orange-500 px-8 py-3 text-lg font-semibold">
+                <Button
+                  variant="outline"
+                  className="border-2 border-white text-white hover:bg-white hover:text-orange-500 px-8 py-3 text-lg font-semibold"
+                >
                   View Courses
                 </Button>
               </Link>

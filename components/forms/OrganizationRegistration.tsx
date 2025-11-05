@@ -1,28 +1,28 @@
 // filepath: /home/ayush/code/stackskills/components/forms/OrganizationRegistrationForm.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { Loader2 } from 'lucide-react';
 
 export function OrganizationRegistrationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    organizationName: "",
-    organizationType: "",
-    email: "",
-    phone: "",
-    website: "",
-    address: "",
-    city: "",
-    state: "",
-    pincode: "",
-    contactPersonName: "",
-    contactPersonDesignation: "",
-    contactPersonEmail: "",
-    contactPersonPhone: "",
+    organizationName: '',
+    organizationType: '',
+    email: '',
+    phone: '',
+    website: '',
+    address: '',
+    city: '',
+    state: '',
+    pincode: '',
+    contactPersonName: '',
+    contactPersonDesignation: '',
+    contactPersonEmail: '',
+    contactPersonPhone: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,16 +31,16 @@ export function OrganizationRegistrationForm() {
 
     // Show loading toast
     toast({
-      title: "⏳ Submitting Registration...",
-      description: "Please wait while we process your organization registration.",
-      variant: "loading" as any,
+      title: '⏳ Submitting Registration...',
+      description: 'Please wait while we process your organization registration.',
+      variant: 'loading' as any,
     });
 
     try {
-      const response = await fetch("/api/organization-register", {
-        method: "POST",
+      const response = await fetch('/api/organization-register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -50,42 +50,46 @@ export function OrganizationRegistrationForm() {
       if (response.ok) {
         // Success toast
         toast({
-          title: "✅ Registration Successful!",
-          description: result.message || "Your organization registration has been submitted successfully. We'll contact you soon.",
-          variant: "success" as any,
+          title: '✅ Registration Successful!',
+          description:
+            result.message ||
+            "Your organization registration has been submitted successfully. We'll contact you soon.",
+          variant: 'success' as any,
         });
 
         // Reset form
         setFormData({
-          organizationName: "",
-          organizationType: "",
-          email: "",
-          phone: "",
-          website: "",
-          address: "",
-          city: "",
-          state: "",
-          pincode: "",
-          contactPersonName: "",
-          contactPersonDesignation: "",
-          contactPersonEmail: "",
-          contactPersonPhone: "",
+          organizationName: '',
+          organizationType: '',
+          email: '',
+          phone: '',
+          website: '',
+          address: '',
+          city: '',
+          state: '',
+          pincode: '',
+          contactPersonName: '',
+          contactPersonDesignation: '',
+          contactPersonEmail: '',
+          contactPersonPhone: '',
         });
       } else {
         // Error toast with specific error message from API
         toast({
-          title: "❌ Registration Failed",
-          description: result.error || "There was an error submitting your registration. Please try again.",
-          variant: "destructive",
+          title: '❌ Registration Failed',
+          description:
+            result.error || 'There was an error submitting your registration. Please try again.',
+          variant: 'destructive',
         });
       }
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error('Registration error:', error);
       // Error toast for network issues
       toast({
-        title: "⚠️ Network Error",
-        description: "Unable to connect to the server. Please check your internet connection and try again.",
-        variant: "destructive",
+        title: '⚠️ Network Error',
+        description:
+          'Unable to connect to the server. Please check your internet connection and try again.',
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
@@ -96,7 +100,9 @@ export function OrganizationRegistrationForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Organization Name *</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Organization Name *
+          </label>
           <input
             type="text"
             required
@@ -258,7 +264,7 @@ export function OrganizationRegistrationForm() {
             Submitting...
           </>
         ) : (
-          "Register Organization"
+          'Register Organization'
         )}
       </Button>
     </form>
