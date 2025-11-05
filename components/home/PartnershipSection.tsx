@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Card } from '@/components/ui/card';
@@ -23,7 +23,9 @@ export default function PartnershipSection() {
               <Monitor className="w-8 h-8 text-orange-500" />
             </div>
             <h3 className="text-xl font-semibold text-black mb-2">Interactive Platform</h3>
-            <p className="text-gray-600">Learn with hands-on coding exercises and real-time feedback</p>
+            <p className="text-gray-600">
+              Learn with hands-on coding exercises and real-time feedback
+            </p>
           </Card>
 
           <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200">
@@ -31,7 +33,9 @@ export default function PartnershipSection() {
               <Users className="w-8 h-8 text-blue-500" />
             </div>
             <h3 className="text-xl font-semibold text-black mb-2">Expert Teachers</h3>
-            <p className="text-gray-600">Learn from certified instructors with years of experience</p>
+            <p className="text-gray-600">
+              Learn from certified instructors with years of experience
+            </p>
           </Card>
 
           <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200">

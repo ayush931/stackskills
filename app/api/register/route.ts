@@ -1,16 +1,20 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+/**
+ * Registration of new candidate for the challenge
+ * @param request - Takes the various input throught the form/body
+ * @returns - Registration is completed or not
+ */
+
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-
     const { name, email, phone, grade, experience, learningPathId } = data;
 
     if (!name || !email || !phone || !grade || !experience || !learningPathId) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
-
     const registrationData = {
       name,
       email,
@@ -20,8 +24,6 @@ export async function POST(request: Request) {
       learning_path_id: learningPathId,
       created_at: new Date().toISOString(),
     };
-
-    console.log('Registration received:', registrationData);
 
     const thankYouEmailHtml = `
       <!DOCTYPE html>
@@ -152,8 +154,6 @@ export async function POST(request: Request) {
 
     await transporter.sendMail(adminNotificationOptions);
 
-    console.log('Admin notification email sent successfully');
-
     return NextResponse.json({
       success: true,
       message: 'Registration successful! Check your email for confirmation.',
@@ -163,6 +163,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Registration error:', error);
-    return NextResponse.json({ error: 'Failed to process registration' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'Failed to process registration' },
+      { status: 500 }
+    );
   }
 }

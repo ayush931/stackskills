@@ -12,11 +12,9 @@ import {
   Award,
   Heart,
   Lightbulb,
-  Rocket,
   Star,
   CircleCheck as CheckCircle,
   Globe,
-  BookOpen,
   Trophy,
 } from 'lucide-react';
 import Link from 'next/link';

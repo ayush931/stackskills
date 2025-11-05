@@ -3,6 +3,12 @@ import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import Organization from '@/schema/organization';
 
+/**
+ * Give the searched organization registered through search bar
+ * @param request - Takes the organization's name using the search box in params
+ * @returns - Returns the searched organization name
+ */
+
 export async function GET(request: Request) {
   try {
     // Connect to database
@@ -45,6 +51,12 @@ export async function GET(request: Request) {
     );
   }
 }
+
+/**
+ * Takes the organization information through the form
+ * @param request - Takes various input or data through the body
+ * @returns - Return the response that information is submitted or not
+ */
 
 export async function POST(request: Request) {
   try {

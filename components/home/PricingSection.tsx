@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -47,10 +47,22 @@ export default function PricingSection() {
 
               <div className="space-y-4">
                 {[
-                  { icon: <Monitor className="w-5 h-5 text-green-500" />, text: "Study at home using our platform" },
-                  { icon: <Clock className="w-5 h-5 text-green-500" />, text: "1 Hr Masterclass every weekend" },
-                  { icon: <Users className="w-5 h-5 text-green-500" />, text: "Doubt support: 9 AM - 9 PM" },
-                  { icon: <CheckCircle className="w-5 h-5 text-green-500" />, text: "Access of portal" },
+                  {
+                    icon: <Monitor className="w-5 h-5 text-green-500" />,
+                    text: 'Study at home using our platform',
+                  },
+                  {
+                    icon: <Clock className="w-5 h-5 text-green-500" />,
+                    text: '1 Hr Masterclass every weekend',
+                  },
+                  {
+                    icon: <Users className="w-5 h-5 text-green-500" />,
+                    text: 'Doubt support: 9 AM - 9 PM',
+                  },
+                  {
+                    icon: <CheckCircle className="w-5 h-5 text-green-500" />,
+                    text: 'Access of portal',
+                  },
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     {feature.icon}
@@ -59,7 +71,10 @@ export default function PricingSection() {
                 ))}
               </div>
 
-              <Button onClick={() => router.push("https://payments.cashfree.com/forms?code=stackskills")} className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded-xl">
+              <Button
+                onClick={() => router.push('https://payments.cashfree.com/forms?code=stackskills')}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded-xl"
+              >
                 Get Started
               </Button>
             </div>
@@ -89,15 +104,28 @@ export default function PricingSection() {
               </div>
 
               <p className="text-gray-300 text-lg">
-                Elevate your brand with 25 design projects per month, premium templates, and priority support. Ideal for rapidly growing businesses.
+                Elevate your brand with 25 design projects per month, premium templates, and
+                priority support. Ideal for rapidly growing businesses.
               </p>
 
               <div className="space-y-4">
                 {[
-                  { icon: <Users className="w-5 h-5 text-green-400" />, text: "Learn directly from our expert teachers" },
-                  { icon: <Clock className="w-5 h-5 text-green-400" />, text: "MWF / TTS 45-min classes" },
-                  { icon: <Users className="w-5 h-5 text-green-400" />, text: "Doubt support: 9 AM - 9 PM" },
-                  { icon: <Star className="w-5 h-5 text-green-400" />, text: "1.5 Hr Masterclass every weekend" },
+                  {
+                    icon: <Users className="w-5 h-5 text-green-400" />,
+                    text: 'Learn directly from our expert teachers',
+                  },
+                  {
+                    icon: <Clock className="w-5 h-5 text-green-400" />,
+                    text: 'MWF / TTS 45-min classes',
+                  },
+                  {
+                    icon: <Users className="w-5 h-5 text-green-400" />,
+                    text: 'Doubt support: 9 AM - 9 PM',
+                  },
+                  {
+                    icon: <Star className="w-5 h-5 text-green-400" />,
+                    text: '1.5 Hr Masterclass every weekend',
+                  },
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     {feature.icon}
@@ -106,7 +134,10 @@ export default function PricingSection() {
                 ))}
               </div>
 
-              <Button onClick={() => router.push("https://payments.cashfree.com/forms/SSJR_Liveclasses")} className="w-full bg-white hover:bg-gray-100 text-black py-3 text-lg font-semibold rounded-xl">
+              <Button
+                onClick={() => router.push('https://payments.cashfree.com/forms/SSJR_Liveclasses')}
+                className="w-full bg-white hover:bg-gray-100 text-black py-3 text-lg font-semibold rounded-xl"
+              >
                 Start Live Classes
               </Button>
             </div>

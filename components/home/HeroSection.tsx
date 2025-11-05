@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -21,17 +21,23 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className={`gap-8 flex flex-col space-y-8 ${isVisible ? 'animate-in slide-in-from-left-5 duration-1000' : 'opacity-0'}`}>
+          <div
+            className={`gap-8 flex flex-col space-y-8 ${isVisible ? 'animate-in slide-in-from-left-5 duration-1000' : 'opacity-0'}`}
+          >
             <div className="space-y-4">
               <Badge className="bg-orange-100 text-orange-600 hover:bg-orange-100">
                 🚀 Partnered with Codementum
               </Badge>
               <h1 className="text-3xl lg:text-5xl font-serif font-bold text-black leading-tight">
                 Learn Coding & STEM the
-                <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent"> Smart Way</span>
+                <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                  {' '}
+                  Smart Way
+                </span>
               </h1>
               <p className="text-md lg:text-lg text-gray-600 font-serif leading-relaxed">
-                Join thousands of students from classes 4-10 learning coding, technology, and STEM subjects through interactive and fun methods.
+                Join thousands of students from classes 4-10 learning coding, technology, and STEM
+                subjects through interactive and fun methods.
               </p>
             </div>
 
@@ -43,7 +49,10 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
                 </Button>
               </Link>
               <Link href="/courses">
-                <Button variant="outline" className="border-2 border-gray-300 px-8 py-6 text-lg font-semibold rounded-xl hover:border-orange-500 hover:text-orange-500 transition-all duration-300">
+                <Button
+                  variant="outline"
+                  className="border-2 border-gray-300 px-8 py-6 text-lg font-semibold rounded-xl hover:border-orange-500 hover:text-orange-500 transition-all duration-300"
+                >
                   <BookOpen className="w-5 h-5 mr-2" />
                   View Courses
                 </Button>
@@ -66,7 +75,9 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
             </div>
           </div>
 
-          <div className={`relative ${isVisible ? 'animate-in slide-in-from-right-5 duration-1000' : 'opacity-0'}`}>
+          <div
+            className={`relative ${isVisible ? 'animate-in slide-in-from-right-5 duration-1000' : 'opacity-0'}`}
+          >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600 rounded-3xl transform rotate-6 scale-105 opacity-20"></div>
               <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
@@ -90,7 +101,10 @@ export default function HeroSection({ isVisible }: HeroSectionProps) {
                       <span className="font-semibold text-black">75%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-orange-400 to-orange-600 h-2 rounded-full animate-pulse" style={{ width: '75%' }}></div>
+                      <div
+                        className="bg-gradient-to-r from-orange-400 to-orange-600 h-2 rounded-full animate-pulse"
+                        style={{ width: '75%' }}
+                      ></div>
                     </div>
                   </div>
 

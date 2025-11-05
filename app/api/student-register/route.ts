@@ -3,6 +3,12 @@ import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import Student from '@/schema/student';
 
+/**
+ * Gives the student registration details
+ * @param request - Take the input through params using search bar
+ * @returns - Return the searched result of students
+ */
+
 export async function GET(request: Request) {
   try {
     // Connect to database
@@ -45,6 +51,12 @@ export async function GET(request: Request) {
     );
   }
 }
+
+/**
+ * Student registration process
+ * @param request - Takes the various input through form
+ * @returns - Student registration form is submitted or not
+ */
 
 export async function POST(request: Request) {
   try {

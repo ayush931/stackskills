@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Card } from '@/components/ui/card';
@@ -7,12 +7,12 @@ import { Clock, ArrowRight } from 'lucide-react';
 
 export default function CoursesSection() {
   const courses = [
-    { grade: "4-5", title: "Visual Programming", icon: "🎮", color: "bg-pink-100 text-pink-600" },
-    { grade: "6-7", title: "Scratch & Logic", icon: "🧩", color: "bg-blue-100 text-blue-600" },
-    { grade: "8-9", title: "Python Basics", icon: "🐍", color: "bg-green-100 text-green-600" },
-    { grade: "9-10", title: "Web Development", icon: "🌐", color: "bg-purple-100 text-purple-600" },
-    { grade: "All", title: "Robotics & IoT", icon: "🤖", color: "bg-orange-100 text-orange-600" },
-    { grade: "All", title: "AI & Machine Learning", icon: "🧠", color: "bg-red-100 text-red-600" },
+    { grade: '4-5', title: 'Visual Programming', icon: '🎮', color: 'bg-pink-100 text-pink-600' },
+    { grade: '6-7', title: 'Scratch & Logic', icon: '🧩', color: 'bg-blue-100 text-blue-600' },
+    { grade: '8-9', title: 'Python Basics', icon: '🐍', color: 'bg-green-100 text-green-600' },
+    { grade: '9-10', title: 'Web Development', icon: '🌐', color: 'bg-purple-100 text-purple-600' },
+    { grade: 'All', title: 'Robotics & IoT', icon: '🤖', color: 'bg-orange-100 text-orange-600' },
+    { grade: 'All', title: 'AI & Machine Learning', icon: '🧠', color: 'bg-red-100 text-red-600' },
   ];
 
   return (
@@ -28,7 +28,10 @@ export default function CoursesSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => (
-            <Card key={index} className="p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 border-2 hover:border-orange-200 cursor-pointer group">
+            <Card
+              key={index}
+              className="p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 border-2 hover:border-orange-200 cursor-pointer group"
+            >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <Badge className={course.color}>Class {course.grade}</Badge>
@@ -38,7 +41,8 @@ export default function CoursesSection() {
                   {course.title}
                 </h3>
                 <p className="text-gray-600">
-                  Interactive lessons designed for grade {course.grade} students with hands-on projects and assignments.
+                  Interactive lessons designed for grade {course.grade} students with hands-on
+                  projects and assignments.
                 </p>
                 <div className="flex items-center justify-between pt-2">
                   <div className="flex items-center space-x-2 text-sm text-gray-500">

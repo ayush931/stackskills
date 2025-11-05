@@ -3,6 +3,12 @@ import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import School from '@/schema/school';
 
+/**
+ * Give the searched result
+ * @param request - Takes the data/input through params via search bar
+ * @returns - Final response that is being given through params
+ */
+
 export async function GET(request: Request) {
   try {
     // Connect to database
@@ -45,6 +51,12 @@ export async function GET(request: Request) {
     );
   }
 }
+
+/**
+ * School registration process
+ * @param request - Takes various input through form
+ * @returns - School registration form is submitted or not
+ */
 
 export async function POST(request: Request) {
   try {

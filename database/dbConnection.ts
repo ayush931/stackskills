@@ -1,6 +1,10 @@
 import { MONGO_URI } from '@/config';
 import mongoose from 'mongoose';
 
+/**
+ * Connection to MongoDB Database
+ */
+
 const connectionToDB = async () => {
   const { connection } = await mongoose.connect(MONGO_URI);
 

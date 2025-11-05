@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -50,15 +50,21 @@ export default function WelcomePopup({ showPopup, setShowPopup }: WelcomePopupPr
             {/* Enhanced Action Buttons Section */}
             <div className="relative px-4 sm:px-8 pb-6 pt-2">
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href="/register" onClick={() => setShowPopup(false)} className="w-full sm:w-auto">
-                  <Button
-                    className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-4 text-lg font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 rounded-xl"
-                  >
+                <Link
+                  href="/register"
+                  onClick={() => setShowPopup(false)}
+                  className="w-full sm:w-auto"
+                >
+                  <Button className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-10 py-4 text-lg font-bold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 rounded-xl">
                     <Rocket className="w-5 h-5 mr-2 animate-bounce" />
                     Register Now
                   </Button>
                 </Link>
-                <Link href="/courses" onClick={() => setShowPopup(false)} className="w-full sm:w-auto">
+                <Link
+                  href="/courses"
+                  onClick={() => setShowPopup(false)}
+                  className="w-full sm:w-auto"
+                >
                   <Button
                     variant="outline"
                     className="w-full sm:w-auto bg-white border-3 border-orange-500 text-orange-600 hover:bg-orange-50 hover:border-orange-600 px-10 py-4 text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-xl"

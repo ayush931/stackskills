@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -13,7 +13,8 @@ export default function CTASection() {
             Ready to Start Your Coding Journey?
           </h2>
           <p className="text-xl text-orange-100 max-w-2xl mx-auto">
-            Join thousands of students already learning with StackSkills. Start your free trial today!
+            Join thousands of students already learning with StackSkills. Start your free trial
+            today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/start-learning">
@@ -22,7 +23,10 @@ export default function CTASection() {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button variant="outline" className="border-2 border-white text-black hover:bg-white hover:text-orange-500 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300">
+              <Button
+                variant="outline"
+                className="border-2 border-white text-black hover:bg-white hover:text-orange-500 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300"
+              >
                 Schedule Demo
               </Button>
             </Link>

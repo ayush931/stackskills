@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Card } from '@/components/ui/card';
@@ -7,10 +7,26 @@ import { Cpu, Users, Clock, Trophy } from 'lucide-react';
 
 export default function FeaturesSection() {
   const features = [
-    { icon: <Cpu className="w-8 h-8 text-orange-500" />, title: "STEM Focus", desc: "Complete STEM education for future-ready skills" },
-    { icon: <Users className="w-8 h-8 text-blue-500" />, title: "Expert Teachers", desc: "Learn from certified and experienced instructors" },
-    { icon: <Clock className="w-8 h-8 text-green-500" />, title: "Flexible Schedule", desc: "Learn at your own pace with recorded sessions" },
-    { icon: <Trophy className="w-8 h-8 text-purple-500" />, title: "Certificates", desc: "Get recognized certificates upon course completion" },
+    {
+      icon: <Cpu className="w-8 h-8 text-orange-500" />,
+      title: 'STEM Focus',
+      desc: 'Complete STEM education for future-ready skills',
+    },
+    {
+      icon: <Users className="w-8 h-8 text-blue-500" />,
+      title: 'Expert Teachers',
+      desc: 'Learn from certified and experienced instructors',
+    },
+    {
+      icon: <Clock className="w-8 h-8 text-green-500" />,
+      title: 'Flexible Schedule',
+      desc: 'Learn at your own pace with recorded sessions',
+    },
+    {
+      icon: <Trophy className="w-8 h-8 text-purple-500" />,
+      title: 'Certificates',
+      desc: 'Get recognized certificates upon course completion',
+    },
   ];
 
   return (
@@ -23,7 +39,10 @@ export default function FeaturesSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200">
+            <Card
+              key={index}
+              className="p-6 text-center hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 hover:border-orange-200"
+            >
               <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
                 {feature.icon}
               </div>

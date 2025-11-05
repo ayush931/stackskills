@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+/**
+ * Got the contact data on the admin mail
+ * @param request - Takes various input from user(name, email, phone, subject, inquiryType, message)
+ * @returns - Returns the message(success / failure) with the response in the admin mail
+ */
+
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -164,6 +170,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Contact form error:', error);
-    return NextResponse.json({ success: false, error: 'Failed to process contact form' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'Failed to process contact form' },
+      { status: 500 }
+    );
   }
 }
