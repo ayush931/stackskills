@@ -78,98 +78,95 @@ export async function POST(req: NextRequest) {
 
     const hashedPassword = hashResult.hash as string;
 
-    const createUser = await prisma.user.create({
-      data: {
-        name,
-        password: hashedPassword,
-        schoolName,
-        className,
-        phone,
-        role: 'USER',
-      },
-      select: {
-        id: true,
-        name: true,
-        schoolName: true,
-        className: true,
-        phone: true,
-        password: false,
-        role: true,
-        session: true,
-      },
-    });
-
-    if (!createUser) {
-      return NextResponse.json(
-        { success: false, message: 'Failed to register new user' },
-        { status: 400 }
-      );
-    }
-
-    // testing that token is creating or not
-    try {
-      const payload: { id: string; phone: string; role: Role } = {
-        id: '12345',
-        phone: '70704726',
-        role: 'ADMIN',
-      };
-      createAccessToken(payload);
-    } catch (error) {
-      return NextResponse.json(
-        { success: false, message: 'Failed to create token' },
-        { status: 400 }
-      );
-    }
-
-    const token = createAccessToken({
-      id: createUser.id,
-      phone: createUser.phone,
-      role: createUser.role as Role,
-    });
-
-    // checking if the user already login with given credentials or not, if yes making the session null and logging out
-    if (createUser.session) {
-      await prisma.user.update({
-        where: { id: createUser.id },
+    const newUser = await prisma.$transaction(async (tx) => {
+      const createUser = await tx.user.create({
         data: {
-          session: null,
+          name,
+          password: hashedPassword,
+          schoolName,
+          className,
+          phone,
+          role: 'USER'
         },
-      });
-      return NextResponse.json(
-        { success: false, message: 'Already logged in with the given credentials, Try again!!!' },
-        { status: 400 }
-      );
-    }
+        select: {
+          id: true,
+          name: true,
+          phone: true,
+          schoolName: true,
+          className: true,
+          session: true,
+          role: true,
+          password: false
+        }
+      })
 
-    // updating the token value in session of the user
-    try {
-      await prisma.user.update({
-        where: { id: createUser.id },
-        data: {
-          session: token,
-        },
-      });
-    } catch (error) {
-      return NextResponse.json(
-        { success: false, message: 'Failed to update the session' },
-        { status: 400 }
-      );
-    }
+      if (!createUser) {
+        return NextResponse.json(
+          { success: false, message: 'Failed to create user' },
+          { status: 400 }
+        )
+      }
+      
+      try {
+        const payload = {
+          id:"12345",
+          phone: "7070707070",
+          role: "ADMIN" as Role
+        }
+        createAccessToken(payload)
+      } catch (error) {
+        return NextResponse.json(
+          { success: false, message: 'Failed to create access token' },
+          { status: 400 }
+        )
+      }
+
+      const token = createAccessToken({
+        id: createUser.id,
+        phone: createUser.phone,
+        role: createUser.role
+      })
+
+      try {
+        await tx.user.update({
+          where: { id: createUser.id },
+          data: { session: token }
+        })
+      } catch (error) {
+        return NextResponse.json(
+          { success: false, message: 'Failed to update session token' },
+          { status: 400 }
+        )
+      }
+
+      return {
+        id: createUser.id,
+        name: createUser.name,
+        phone: createUser.phone,
+        className: createUser.className,
+        schoolName: createUser.schoolName,
+        role: createUser.role,
+        token
+      }
+    })
 
     const response = NextResponse.json(
-      { success: true, message: 'User registered successfully', data: createUser },
+      { success: true, message: 'Registration successfull', data: newUser },
       { status: 200 }
-    );
+    )
 
-    // setting the token here
+    if (newUser instanceof NextResponse) {
+      return newUser
+    }
+
     response.cookies.set({
       name: 'token',
-      value: token,
+      value: newUser.token,
+      maxAge: 7000 * 60 * 24 * 24,
       sameSite: 'strict',
-      secure: true,
-      httpOnly: true,
-      maxAge: 7000 * 24 * 60 * 60,
-    });
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true
+    })
 
     return response;
   } catch (error) {
