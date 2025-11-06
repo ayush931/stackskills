@@ -5,6 +5,12 @@ import { registerUserSchema } from '@/zodValidation';
 import { NextRequest, NextResponse } from 'next/server';
 import type { Role } from '@/utils/token';
 
+/**
+ * Registration of new user
+ * @param req - Taking the various request or data from the user through registration form
+ * @returns - Final response that user is registered or not
+ */
+
 export async function POST(req: NextRequest) {
   try {
     let requestBody;
@@ -17,6 +23,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // using the zod schema here for the input validation
     let validateInput;
     try {
       validateInput = registerUserSchema.parse(requestBody);
@@ -37,6 +44,7 @@ export async function POST(req: NextRequest) {
       schoolName,
     };
 
+    // finding any missing fields here
     const missingFields = Object.keys(requiredFields).filter(
       (key) => !requiredFields[key as keyof typeof requiredFields]
     );
@@ -98,6 +106,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // testing that token is creating or not
     try {
       const payload: { id: string; phone: string; role: Role } = {
         id: '12345',
@@ -118,6 +127,7 @@ export async function POST(req: NextRequest) {
       role: createUser.role as Role,
     });
 
+    // checking if the user already login with given credentials or not, if yes making the session null and logging out
     if (createUser.session) {
       await prisma.user.update({
         where: { id: createUser.id },
@@ -131,6 +141,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // updating the token value in session of the user
     try {
       await prisma.user.update({
         where: { id: createUser.id },
@@ -150,6 +161,7 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
 
+    // setting the token here
     response.cookies.set({
       name: 'token',
       value: token,
