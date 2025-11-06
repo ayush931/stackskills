@@ -21,6 +21,7 @@ model User {
   className  String
   schoolName String
   password   String
+  session    String?  @unique
   role       Role     @default(USER)
   createdAt  DateTime @default(now())
   stackId    String?  @unique

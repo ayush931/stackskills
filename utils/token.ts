@@ -8,7 +8,7 @@ const JWT_AUDIENCE = 'stackskills';
 
 // payload in the token, what should be exists
 export interface TokenPayload {
-  sub: string;
+  id: string;
   phone: string;
   role: Role;
   iat?: number;
@@ -40,9 +40,9 @@ const verifyOptions: jwt.VerifyOptions = {
  * @returns - JWT Token
  */
 
-export function createAccessToken(payload: { sub: string; phone: string; role: Role }): string {
+export function createAccessToken(payload: { id: string; phone: string; role: Role }): string {
   const tokenPayload: TokenPayload = {
-    sub: payload.sub,
+    id: payload.id,
     phone: payload.phone,
     role: payload.role,
   };
