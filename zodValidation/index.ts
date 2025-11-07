@@ -56,4 +56,10 @@ export const registerUserSchema = z.object({
   role: roleSchema,
 });
 
+export const loginUserSchema = z.object({
+  phone: phoneSchema,
+  password: passwordSchema,
+});
+
 export type RegisterUserInput = z.infer<typeof registerUserSchema>;
+export type LoginUserInput = z.infer<typeof loginUserSchema>;

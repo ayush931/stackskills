@@ -17,10 +17,7 @@ export async function POST(req: NextRequest) {
     try {
       requestBody = await req.json();
     } catch (error) {
-      return NextResponse.json(
-        { success: false, message: 'Require user input correctly' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
     }
 
     // using the zod schema here for the input validation
@@ -28,10 +25,7 @@ export async function POST(req: NextRequest) {
     try {
       validateInput = registerUserSchema.parse(requestBody);
     } catch (error) {
-      return NextResponse.json(
-        { success: false, message: 'Give the valid input data' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
     }
 
     const { name, phone, password, className, schoolName } = validateInput;
@@ -78,6 +72,9 @@ export async function POST(req: NextRequest) {
 
     const hashedPassword = hashResult.hash as string;
 
+    /**
+     * Adding the transaction method here so that user register when all the process has been done successfully and stored in db
+     */
     const newUser = await prisma.$transaction(async (tx) => {
       const createUser = await tx.user.create({
         data: {
@@ -86,7 +83,7 @@ export async function POST(req: NextRequest) {
           schoolName,
           className,
           phone,
-          role: 'USER'
+          role: 'USER',
         },
         select: {
           id: true,
@@ -96,47 +93,41 @@ export async function POST(req: NextRequest) {
           className: true,
           session: true,
           role: true,
-          password: false
-        }
-      })
+          password: false,
+        },
+      });
 
       if (!createUser) {
         return NextResponse.json(
           { success: false, message: 'Failed to create user' },
           { status: 400 }
-        )
+        );
       }
-      
+
       try {
         const payload = {
-          id:"12345",
-          phone: "7070707070",
-          role: "ADMIN" as Role
-        }
-        createAccessToken(payload)
+          id: '12345',
+          phone: '7070707070',
+          role: 'ADMIN' as Role,
+        };
+        createAccessToken(payload);
       } catch (error) {
-        return NextResponse.json(
-          { success: false, message: 'Failed to create access token' },
-          { status: 400 }
-        )
+        return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
       }
 
       const token = createAccessToken({
         id: createUser.id,
         phone: createUser.phone,
-        role: createUser.role
-      })
+        role: createUser.role,
+      });
 
       try {
         await tx.user.update({
           where: { id: createUser.id },
-          data: { session: token }
-        })
+          data: { session: token },
+        });
       } catch (error) {
-        return NextResponse.json(
-          { success: false, message: 'Failed to update session token' },
-          { status: 400 }
-        )
+        return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
       }
 
       return {
@@ -146,27 +137,27 @@ export async function POST(req: NextRequest) {
         className: createUser.className,
         schoolName: createUser.schoolName,
         role: createUser.role,
-        token
-      }
-    })
+        token,
+      };
+    });
 
     const response = NextResponse.json(
       { success: true, message: 'Registration successfull', data: newUser },
       { status: 200 }
-    )
+    );
 
     if (newUser instanceof NextResponse) {
-      return newUser
+      return newUser;
     }
 
     response.cookies.set({
       name: 'token',
       value: newUser.token,
-      maxAge: 7000 * 60 * 24 * 24,
+      maxAge: 7 * 24 * 60 * 60,
       sameSite: 'strict',
       secure: process.env.NODE_ENV === 'production',
-      httpOnly: true
-    })
+      httpOnly: true,
+    });
 
     return response;
   } catch (error) {
