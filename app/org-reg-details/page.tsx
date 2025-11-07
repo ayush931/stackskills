@@ -59,7 +59,7 @@ export default function OrganizationDetailsPage() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/organization-register?page=${page}&limit=10`);
+      const response = await fetch(`/api/get-organizations?page=${page}&limit=10`);
       if (!response.ok) {
         throw new Error('Failed to fetch organizations');
       }

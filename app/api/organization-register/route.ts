@@ -2,55 +2,7 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import Organization from '@/schema/organization';
-
-/**
- * Give the searched organization registered through search bar
- * @param request - Takes the organization's name using the search box in params
- * @returns - Returns the searched organization name
- */
-
-export async function GET(request: Request) {
-  try {
-    // Connect to database
-    await connectionToDB();
-
-    // Get query parameters for pagination
-    const { searchParams } = new URL(request.url);
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '10');
-    const skip = (page - 1) * limit;
-
-    // Fetch organizations in descending order (newest first)
-    const organizations = await Organization.find()
-      .sort({ createdAt: -1 }) // -1 for descending order
-      .skip(skip)
-      .limit(limit)
-      .lean()
-      .exec();
-
-    // Get total count for pagination
-    const totalCount = await Organization.countDocuments();
-
-    return NextResponse.json({
-      success: true,
-      data: organizations,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(totalCount / limit),
-        totalRecords: totalCount,
-        recordsPerPage: limit,
-        hasNextPage: page < Math.ceil(totalCount / limit),
-        hasPreviousPage: page > 1,
-      },
-    });
-  } catch (error) {
-    console.error('Error fetching organizations:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch organization registrations.' },
-      { status: 500 }
-    );
-  }
-}
+import ApiError from '@/utils/apiError';
 
 /**
  * Takes the organization information through the form
@@ -92,7 +44,7 @@ export async function POST(request: Request) {
       !contactPersonEmail ||
       !contactPersonPhone
     ) {
-      return NextResponse.json({ error: 'All required fields must be filled' }, { status: 400 });
+      throw new ApiError(400, 'All fields are required');
     }
 
     // Connect to database
@@ -114,8 +66,6 @@ export async function POST(request: Request) {
       contactPersonEmail,
       contactPersonPhone,
     });
-
-    console.log('Organization registered:', organization._id);
 
     // Send email notifications
     const transporter = nodemailer.createTransport({
@@ -280,8 +230,6 @@ export async function POST(request: Request) {
       html: adminNotificationHtml,
     });
 
-    console.log('Notification emails sent successfully');
-
     return NextResponse.json({
       success: true,
       message: 'Registration successful! Our team will contact you within 24 hours.',
@@ -294,9 +242,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Organization registration error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process registration. Please try again.' },
-      { status: 500 }
-    );
+    throw new ApiError(500, String(error));
   }
 }

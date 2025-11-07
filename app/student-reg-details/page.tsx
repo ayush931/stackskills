@@ -61,7 +61,7 @@ export default function StudentDetailsPage() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/student-register?page=${page}&limit=10`);
+      const response = await fetch(`/api/get-students?page=${page}&limit=10`);
       if (!response.ok) {
         throw new Error('Failed to fetch students');
       }

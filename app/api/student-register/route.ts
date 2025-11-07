@@ -2,55 +2,7 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import Student from '@/schema/student';
-
-/**
- * Gives the student registration details
- * @param request - Take the input through params using search bar
- * @returns - Return the searched result of students
- */
-
-export async function GET(request: Request) {
-  try {
-    // Connect to database
-    await connectionToDB();
-
-    // Get query parameters for pagination
-    const { searchParams } = new URL(request.url);
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '10');
-    const skip = (page - 1) * limit;
-
-    // Fetch organizations in descending order (newest first)
-    const organizations = await Student.find()
-      .sort({ createdAt: -1 }) // -1 for descending order
-      .skip(skip)
-      .limit(limit)
-      .lean()
-      .exec();
-
-    // Get total count for pagination
-    const totalCount = await Student.countDocuments();
-
-    return NextResponse.json({
-      success: true,
-      data: organizations,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(totalCount / limit),
-        totalRecords: totalCount,
-        recordsPerPage: limit,
-        hasNextPage: page < Math.ceil(totalCount / limit),
-        hasPreviousPage: page > 1,
-      },
-    });
-  } catch (error) {
-    console.error('Error fetching organizations:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch organization registrations.' },
-      { status: 500 }
-    );
-  }
-}
+import ApiError from '@/utils/apiError';
 
 /**
  * Student registration process
@@ -94,11 +46,7 @@ export async function POST(request: Request) {
     if (!pincode) missingFields.push('Pincode');
 
     if (missingFields.length > 0) {
-      console.error('Missing required fields:', missingFields);
-      return NextResponse.json(
-        { error: `Missing required fields: ${missingFields.join(', ')}` },
-        { status: 400 }
-      );
+      throw new ApiError(400, `Missing field required: ${missingFields.join(', ')}`);
     }
 
     // Connect to database
@@ -121,8 +69,6 @@ export async function POST(request: Request) {
       parentPhone,
       parentEmail,
     });
-
-    console.log('Student registered:', student._id);
 
     // Send email notifications
     const transporter = nodemailer.createTransport({
@@ -284,8 +230,6 @@ export async function POST(request: Request) {
       html: adminNotificationHtml,
     });
 
-    console.log('Notification emails sent successfully');
-
     return NextResponse.json({
       success: true,
       message: 'Registration successful! We will contact you soon.',
@@ -298,27 +242,6 @@ export async function POST(request: Request) {
     });
   } catch (error: any) {
     console.error('Student registration error:', error);
-
-    // Handle specific Mongoose validation errors
-    if (error.name === 'ValidationError') {
-      const validationErrors = Object.values(error.errors).map((err: any) => err.message);
-      return NextResponse.json(
-        { error: `Validation failed: ${validationErrors.join(', ')}` },
-        { status: 400 }
-      );
-    }
-
-    // Handle duplicate key errors
-    if (error.code === 11000) {
-      return NextResponse.json(
-        { error: 'A student with this information already exists' },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(
-      { error: error.message || 'Failed to process registration. Please try again.' },
-      { status: 500 }
-    );
+    throw new ApiError(500, String(error));
   }
 }

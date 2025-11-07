@@ -4,6 +4,7 @@ import { createAccessToken } from '@/utils/token';
 import { loginUserSchema } from '@/zodValidation';
 import { NextRequest, NextResponse } from 'next/server';
 import type { Role } from '@/utils/token';
+import ApiError from '@/utils/apiError';
 
 /**
  * Log in api endpoint
@@ -17,7 +18,7 @@ export async function POST(req: NextRequest) {
     try {
       requestBody = await req.json();
     } catch (error) {
-      return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
+      throw new ApiError(400, String(error));
     }
 
     // validating the data using the zod
@@ -25,7 +26,7 @@ export async function POST(req: NextRequest) {
     try {
       validateData = loginUserSchema.parse(requestBody);
     } catch (error) {
-      return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
+      throw new ApiError(400, String(error));
     }
 
     const { phone, password } = validateData;
@@ -41,10 +42,7 @@ export async function POST(req: NextRequest) {
     );
 
     if (missingFields.length > 0) {
-      return NextResponse.json({
-        success: false,
-        message: `Missing fields required: ${missingFields.join(', ')}`,
-      });
+      throw new ApiError(400, `Missing field required: ${missingFields.join(', ')}`);
     }
 
     /**
@@ -67,10 +65,7 @@ export async function POST(req: NextRequest) {
       });
 
       if (!findUser) {
-        return NextResponse.json(
-          { success: false, message: 'User does not exists, Please register!!!' },
-          { status: 400 }
-        );
+        throw new ApiError(400, 'User does not exists, Please register!!!');
       }
 
       // checking if the user is logged in on other device, if yes then user will logged out
@@ -79,29 +74,32 @@ export async function POST(req: NextRequest) {
           where: { id: findUser.id },
           data: { session: null },
         });
-        return NextResponse.json(
-          { success: false, message: 'Logout from another device, Try log in again!!!' },
+        const response = NextResponse.json(
+          { success: false, message: 'Log out from another device, Please login again!!!' },
           { status: 400 }
         );
+        response.cookies.get({
+          name: 'token',
+          value: '',
+          maxAge: 0,
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+        });
+        return response;
       }
 
       // verifying the user password from the db stored password
       const comparePassword = await verifyPassword(password, findUser.password);
 
       if (!comparePassword.success || !comparePassword.isMatch) {
-        return NextResponse.json(
-          { success: false, message: 'Failed to verify password' },
-          { status: 400 }
-        );
+        throw new ApiError(400, 'Unable to compare the password');
       }
 
       const isPasswordMatched = comparePassword.isMatch;
 
       if (!isPasswordMatched) {
-        return NextResponse.json(
-          { success: false, message: 'Invalid credentials, Try again!!!' },
-          { status: 400 }
-        );
+        throw new ApiError(400, 'Invalid credentials');
       }
 
       try {
@@ -112,7 +110,7 @@ export async function POST(req: NextRequest) {
         };
         createAccessToken(payload);
       } catch (error) {
-        return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
+        throw new ApiError(400, String(error));
       }
 
       const token = createAccessToken({
@@ -128,7 +126,7 @@ export async function POST(req: NextRequest) {
           data: { session: token },
         });
       } catch (error) {
-        return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
+        throw new ApiError(400, String(error));
       }
 
       return {
@@ -163,6 +161,6 @@ export async function POST(req: NextRequest) {
     return response;
   } catch (error) {
     console.error('Error in login user api endpoint', error);
-    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
+    throw new ApiError(500, String(error));
   }
 }

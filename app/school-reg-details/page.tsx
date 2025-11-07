@@ -58,7 +58,7 @@ export default function SchoolDetailsPage() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/school-register?page=${page}&limit=10`);
+      const response = await fetch(`/api/get-schools?page=${page}&limit=10`);
       if (!response.ok) {
         throw new Error('Failed to fetch schools');
       }
