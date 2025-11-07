@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
         hasNextPage: page < Math.ceil(totalCount / limit),
         hasPreviousPage: page > 1,
       },
-    });
+    }, { status: 200 });
   } catch (error) {
     console.error('Error fetching organizations:', error);
     throw new ApiError(500, String(error));

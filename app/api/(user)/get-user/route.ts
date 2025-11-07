@@ -31,6 +31,7 @@ export async function GET(req: NextRequest) {
         schoolName: true,
         className: true,
         role: true,
+        password: false
       },
     });
 
@@ -41,10 +42,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    return NextResponse.json(
-      { success: true, message: 'Fetched user profile', data: userProfile },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true, message: 'Fetched user profile', data: userProfile }, { status: 200 });
   } catch (error) {
     console.error('Error fetching profile:', error);
     return NextResponse.json({ success: false, message: String(error) }, { status: 500 });

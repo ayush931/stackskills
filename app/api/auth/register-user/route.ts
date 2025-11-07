@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, phone, password, className, schoolName } = validateInput;
-    const { confirmPassword } = await req.json();
+    const { confirmPassword } = requestBody;
 
     const requiredFields = {
       name,
