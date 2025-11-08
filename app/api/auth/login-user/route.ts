@@ -98,16 +98,15 @@ export async function POST(req: NextRequest) {
       // verifying the user password from the db stored password
       const comparePassword = await verifyPassword(password, findUser.password);
 
-      if (!comparePassword.success || !comparePassword.isMatch) {
+      if (!comparePassword.success) {
+        console.error('Password verification failed:', comparePassword.error);
         return NextResponse.json(
-          { success: false, message: 'Unable to fetch the password' },
+          { success: false, message: 'Authentication failed. Please try again.' },
           { status: 400 }
         );
       }
 
-      const isPasswordMatched = comparePassword.isMatch;
-
-      if (!isPasswordMatched) {
+      if (!comparePassword.isMatch) {
         return NextResponse.json(
           { success: false, message: 'Invalid credentials' },
           { status: 400 }

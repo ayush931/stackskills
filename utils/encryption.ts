@@ -162,16 +162,19 @@ export const verifyPassword = async (
     }
 
     if (userPassword.length > MAX_PASSWORD_LENGTH) {
+      await new Promise((resolve) => setTimeout(resolve, crypto.randomInt(100, 500)));
       return {
         success: false,
         error: `User password cannot exceed more than ${MAX_PASSWORD_LENGTH} characters`,
       };
     }
 
-    const pepper = PASSWORD_PEPPER;
+    const pepper = PASSWORD_PEPPER || 'default-password-pepper';
     const pepperPassword = userPassword + pepper;
 
     const isMatch = await bcrypt.compare(pepperPassword, dbPassword);
+
+    await new Promise((resolve) => setTimeout(resolve, crypto.randomInt(100, 500)));
 
     return {
       success: true,
@@ -179,6 +182,7 @@ export const verifyPassword = async (
     };
   } catch (error) {
     console.error('Error in verify password', error);
+    await new Promise((resolve) => setTimeout(resolve, crypto.randomInt(100, 500)));
     return {
       success: false,
       error: String(error),
