@@ -1,7 +1,7 @@
-import { RoleGroups } from "@/middlewares/helper";
-import { getUserFromRequest, withRoleAuth } from "@/middlewares/role";
-import prisma from "@/utils/prismaClient";
-import { NextRequest, NextResponse } from "next/server";
+import { RoleGroups } from '@/middlewares/helper';
+import { getUserFromRequest, withRoleAuth } from '@/middlewares/role';
+import prisma from '@/utils/prismaClient';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * Give the individual admin details
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     // finding the admin through the request
     const admin = getUserFromRequest(req);
     if (!admin) {
-      return NextResponse.json({ success: false, message: 'Admin not found' }, { status: 400 })
+      return NextResponse.json({ success: false, message: 'Admin not found' }, { status: 400 });
     }
 
     // finding the profile through the admin id
@@ -33,16 +33,22 @@ export async function GET(req: NextRequest) {
         role: true,
         session: true,
         password: false,
-        stackId: true
-      }
-    })
+        stackId: true,
+      },
+    });
 
     if (!adminProfile) {
-      return NextResponse.json({ success: false, message: 'Admin profile not found' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, message: 'Admin profile not found' },
+        { status: 400 }
+      );
     }
 
     // gives the final response
-    return NextResponse.json({ success: true, message: 'User details fetched', data: adminProfile }, { status: 200 });
+    return NextResponse.json(
+      { success: true, message: 'User details fetched', data: adminProfile },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }

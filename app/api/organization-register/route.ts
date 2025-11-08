@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import Organization from '@/schema/organization';
-import ApiError from '@/utils/apiError';
 
 /**
  * Takes the organization information through the form
@@ -44,7 +43,10 @@ export async function POST(request: Request) {
       !contactPersonEmail ||
       !contactPersonPhone
     ) {
-      throw new ApiError(400, 'All fields are required');
+      return NextResponse.json(
+        { success: false, message: 'All fields are required' },
+        { status: 400 }
+      );
     }
 
     // Connect to database
@@ -242,6 +244,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Organization registration error:', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

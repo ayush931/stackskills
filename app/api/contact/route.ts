@@ -1,4 +1,3 @@
-import ApiError from '@/utils/apiError';
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
@@ -14,7 +13,10 @@ export async function POST(request: Request) {
     const { name, email, phone, subject, inquiryType, message } = data;
 
     if (!name || !email || !subject || !inquiryType || !message) {
-      throw new ApiError(400, 'All fields are required');
+      return NextResponse.json(
+        { success: false, message: 'All fields are required' },
+        { status: 400 }
+      );
     }
     const contactData = {
       name,
@@ -171,6 +173,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Contact form error:', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

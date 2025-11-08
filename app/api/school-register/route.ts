@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import School from '@/schema/school';
-import ApiError from '@/utils/apiError';
 
 /**
  * School registration process
@@ -45,7 +44,10 @@ export async function POST(request: Request) {
     if (!phoneNo) missingFields.push('Phone Number');
 
     if (missingFields.length > 0) {
-      throw new ApiError(400, `Missing fields required: ${missingFields.join(', ')}`);
+      return NextResponse.json(
+        { success: false, message: `Missing field required: ${missingFields.join(', ')}` },
+        { status: 400 }
+      );
     }
 
     // Connect to database
@@ -229,6 +231,6 @@ export async function POST(request: Request) {
     });
   } catch (error: any) {
     console.error('School registration error:', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

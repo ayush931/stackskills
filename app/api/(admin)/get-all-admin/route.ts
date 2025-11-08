@@ -1,7 +1,7 @@
-import { RoleGroups } from "@/middlewares/helper";
-import { withRoleAuth } from "@/middlewares/role";
-import prisma from "@/utils/prismaClient";
-import { NextRequest, NextResponse } from "next/server";
+import { RoleGroups } from '@/middlewares/helper';
+import { withRoleAuth } from '@/middlewares/role';
+import prisma from '@/utils/prismaClient';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   try {
@@ -19,15 +19,18 @@ export async function GET(req: NextRequest) {
         schoolName: true,
         role: true,
         session: true,
-        stackId: true
-      }
-    })
+        stackId: true,
+      },
+    });
 
     if (!allAdmin) {
       return NextResponse.json({ success: false, message: 'Admins not found' }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, message: 'All admins details fetched', data: allAdmin }, { status: 200 });
+    return NextResponse.json(
+      { success: true, message: 'All admins details fetched', data: allAdmin },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }

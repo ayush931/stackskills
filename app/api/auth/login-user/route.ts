@@ -41,7 +41,10 @@ export async function POST(req: NextRequest) {
     );
 
     if (missingFields.length > 0) {
-      return NextResponse.json({ success: false, message: `Missing fields required: ${missingFields.join(', ')}` }, { status: 400 })
+      return NextResponse.json(
+        { success: false, message: `Missing fields required: ${missingFields.join(', ')}` },
+        { status: 400 }
+      );
     }
 
     /**
@@ -60,12 +63,15 @@ export async function POST(req: NextRequest) {
           schoolName: true,
           className: true,
           name: true,
-          stackId: true
+          stackId: true,
         },
       });
 
       if (!findUser) {
-        return NextResponse.json({ success: false, message: 'User not found, Please register!!!' }, { status: 400 })
+        return NextResponse.json(
+          { success: false, message: 'User not found, Please register!!!' },
+          { status: 400 }
+        );
       }
 
       // checking if the user is logged in on other device, if yes then user will logged out
@@ -93,13 +99,19 @@ export async function POST(req: NextRequest) {
       const comparePassword = await verifyPassword(password, findUser.password);
 
       if (!comparePassword.success || !comparePassword.isMatch) {
-        return NextResponse.json({ success: false, message: 'Unable to fetch the password' }, { status: 400 });
+        return NextResponse.json(
+          { success: false, message: 'Unable to fetch the password' },
+          { status: 400 }
+        );
       }
 
       const isPasswordMatched = comparePassword.isMatch;
 
       if (!isPasswordMatched) {
-        return NextResponse.json({ success: false, message: 'Invalid credentials' }, { status: 400 });
+        return NextResponse.json(
+          { success: false, message: 'Invalid credentials' },
+          { status: 400 }
+        );
       }
 
       try {

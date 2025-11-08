@@ -1,4 +1,3 @@
-import ApiError from '@/utils/apiError';
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
@@ -14,7 +13,10 @@ export async function POST(request: Request) {
     const { name, email, phone, grade, experience, learningPathId } = data;
 
     if (!name || !email || !phone || !grade || !experience || !learningPathId) {
-      throw new ApiError(400, 'All fields are required');
+      return NextResponse.json(
+        { success: false, message: 'All fields are required' },
+        { status: 400 }
+      );
     }
     const registrationData = {
       name,
@@ -164,6 +166,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Registration error:', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

@@ -1,8 +1,8 @@
-import connectionToDB from "@/database/dbConnection";
-import { RoleGroups } from "@/middlewares/helper";
-import { withRoleAuth } from "@/middlewares/role";
-import School from "@/schema/school";
-import { NextRequest, NextResponse } from "next/server";
+import connectionToDB from '@/database/dbConnection';
+import { RoleGroups } from '@/middlewares/helper';
+import { withRoleAuth } from '@/middlewares/role';
+import School from '@/schema/school';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * Give the searched result
@@ -36,18 +36,21 @@ export async function GET(request: NextRequest) {
     // Get total count for pagination
     const totalCount = await School.countDocuments();
 
-    return NextResponse.json({
-      success: true,
-      data: organizations,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(totalCount / limit),
-        totalRecords: totalCount,
-        recordsPerPage: limit,
-        hasNextPage: page < Math.ceil(totalCount / limit),
-        hasPreviousPage: page > 1,
+    return NextResponse.json(
+      {
+        success: true,
+        data: organizations,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(totalCount / limit),
+          totalRecords: totalCount,
+          recordsPerPage: limit,
+          hasNextPage: page < Math.ceil(totalCount / limit),
+          hasPreviousPage: page > 1,
+        },
       },
-    }, { status: 200 });
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Error fetching organizations:', error);
     return NextResponse.json({ success: false, message: String(error) }, { status: 500 });

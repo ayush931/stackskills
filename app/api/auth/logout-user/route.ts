@@ -20,7 +20,10 @@ export async function GET(req: NextRequest) {
     const verify = verifyToken(token);
 
     if (!verify) {
-      return NextResponse.json({ success: false, message: 'Unauthorized - Login with correct credentials' }, { status: 400 })
+      return NextResponse.json(
+        { success: false, message: 'Unauthorized - Login with correct credentials' },
+        { status: 400 }
+      );
     }
 
     // deleting the session id from the user

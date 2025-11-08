@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     try {
       requestBody = await req.json();
     } catch (error) {
-      return NextResponse.json({ success: false, message: String(error) }, { status: 400 })
+      return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
     }
 
     // using the zod schema here for the input validation
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       password,
       className,
       schoolName,
-      confirmPassword
+      confirmPassword,
     };
 
     // finding any missing fields here
@@ -47,7 +47,10 @@ export async function POST(req: NextRequest) {
     );
 
     if (missingFields.length > 0) {
-      return NextResponse.json({ success: false, message: `Missing fields required: ${missingFields.join(', ')}` }, { status: 400 });
+      return NextResponse.json(
+        { success: false, message: `Missing fields required: ${missingFields.join(', ')}` },
+        { status: 400 }
+      );
     }
 
     const checkUser = await prisma.user.findUnique({
@@ -55,17 +58,26 @@ export async function POST(req: NextRequest) {
     });
 
     if (checkUser) {
-      return NextResponse.json({ success: false, message: 'User already exists, Please login!!!' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, message: 'User already exists, Please login!!!' },
+        { status: 400 }
+      );
     }
 
     if (password !== confirmPassword) {
-      return NextResponse.json({ success: false, message: 'Password and Confirm Password should be same' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, message: 'Password and Confirm Password should be same' },
+        { status: 400 }
+      );
     }
 
     const hashResult = await hashPassowrd(password);
 
     if (!hashResult.success || !hashResult.hash) {
-      return NextResponse.json({ success: false, message: 'Failed to hash the password' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, message: 'Failed to hash the password' },
+        { status: 400 }
+      );
     }
 
     const hashedPassword = hashResult.hash as string;
@@ -85,7 +97,7 @@ export async function POST(req: NextRequest) {
           className,
           phone,
           role: 'USER',
-          stackId
+          stackId,
         },
         select: {
           id: true,
@@ -96,12 +108,15 @@ export async function POST(req: NextRequest) {
           session: true,
           role: true,
           password: false,
-          stackId: true
+          stackId: true,
         },
       });
 
       if (!createUser) {
-        return NextResponse.json({ success: false, message: 'Failed to create new user' }, { status: 400 });
+        return NextResponse.json(
+          { success: false, message: 'Failed to create new user' },
+          { status: 400 }
+        );
       }
 
       try {

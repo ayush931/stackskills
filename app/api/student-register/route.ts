@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import connectionToDB from '@/database/dbConnection';
 import Student from '@/schema/student';
-import ApiError from '@/utils/apiError';
 
 /**
  * Student registration process
@@ -13,8 +12,6 @@ import ApiError from '@/utils/apiError';
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-
-    console.log('Received student registration data:', data);
 
     const {
       fullName,
@@ -46,7 +43,10 @@ export async function POST(request: Request) {
     if (!pincode) missingFields.push('Pincode');
 
     if (missingFields.length > 0) {
-      throw new ApiError(400, `Missing field required: ${missingFields.join(', ')}`);
+      return NextResponse.json(
+        { success: false, message: `Missing fields required: ${missingFields.join(', ')}` },
+        { status: 400 }
+      );
     }
 
     // Connect to database
@@ -242,6 +242,6 @@ export async function POST(request: Request) {
     });
   } catch (error: any) {
     console.error('Student registration error:', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

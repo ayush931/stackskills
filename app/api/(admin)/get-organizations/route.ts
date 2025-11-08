@@ -36,18 +36,21 @@ export async function GET(request: NextRequest) {
     // Get total count for pagination
     const totalCount = await Organization.countDocuments();
 
-    return NextResponse.json({
-      success: true,
-      data: organizations,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(totalCount / limit),
-        totalRecords: totalCount,
-        recordsPerPage: limit,
-        hasNextPage: page < Math.ceil(totalCount / limit),
-        hasPreviousPage: page > 1,
+    return NextResponse.json(
+      {
+        success: true,
+        data: organizations,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(totalCount / limit),
+          totalRecords: totalCount,
+          recordsPerPage: limit,
+          hasNextPage: page < Math.ceil(totalCount / limit),
+          hasPreviousPage: page > 1,
+        },
       },
-    }, { status: 200 });
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Error fetching organizations:', error);
     return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
