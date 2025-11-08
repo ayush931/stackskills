@@ -2,7 +2,6 @@ import connectionToDB from '@/database/dbConnection';
 import { RoleGroups } from '@/middlewares/helper';
 import { withRoleAuth } from '@/middlewares/role';
 import Organization from '@/schema/organization';
-import ApiError from '@/utils/apiError';
 import { NextRequest, NextResponse } from 'next/server';
 
 /**
@@ -51,6 +50,6 @@ export async function GET(request: NextRequest) {
     }, { status: 200 });
   } catch (error) {
     console.error('Error fetching organizations:', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

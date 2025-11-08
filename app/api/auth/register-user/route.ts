@@ -4,7 +4,7 @@ import { createAccessToken } from '@/utils/token';
 import { registerUserSchema } from '@/zodValidation';
 import { NextRequest, NextResponse } from 'next/server';
 import type { Role } from '@/utils/token';
-import ApiError from '@/utils/apiError';
+import { generateUniqueStackId } from '@/utils/generateStackId';
 
 /**
  * Registration of new user
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     try {
       requestBody = await req.json();
     } catch (error) {
-      throw new ApiError(400, String(error));
+      return NextResponse.json({ success: false, message: String(error) }, { status: 400 })
     }
 
     // using the zod schema here for the input validation
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     try {
       validateInput = registerUserSchema.parse(requestBody);
     } catch (error) {
-      throw new ApiError(400, String(error));
+      return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
     }
 
     const { name, phone, password, className, schoolName } = validateInput;
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     );
 
     if (missingFields.length > 0) {
-      throw new ApiError(400, `Missing fields required: ${missingFields.join(', ')}`);
+      return NextResponse.json({ success: false, message: `Missing fields required: ${missingFields.join(', ')}` }, { status: 400 });
     }
 
     const checkUser = await prisma.user.findUnique({
@@ -55,17 +55,17 @@ export async function POST(req: NextRequest) {
     });
 
     if (checkUser) {
-      throw new ApiError(400, 'User already exists, Please login!!!')
+      return NextResponse.json({ success: false, message: 'User already exists, Please login!!!' }, { status: 400 });
     }
 
     if (password !== confirmPassword) {
-      throw new ApiError(400, 'Password and Confirm Password should be same');
+      return NextResponse.json({ success: false, message: 'Password and Confirm Password should be same' }, { status: 400 });
     }
 
     const hashResult = await hashPassowrd(password);
 
     if (!hashResult.success || !hashResult.hash) {
-      throw new ApiError(400, 'Failed to hash the password')
+      return NextResponse.json({ success: false, message: 'Failed to hash the password' }, { status: 400 });
     }
 
     const hashedPassword = hashResult.hash as string;
@@ -74,6 +74,9 @@ export async function POST(req: NextRequest) {
      * Adding the transaction method here so that user register when all the process has been done successfully and stored in db
      */
     const newUser = await prisma.$transaction(async (tx) => {
+      // creating the 7 digit unique id
+      const stackId = await generateUniqueStackId();
+
       const createUser = await tx.user.create({
         data: {
           name,
@@ -82,6 +85,7 @@ export async function POST(req: NextRequest) {
           className,
           phone,
           role: 'USER',
+          stackId
         },
         select: {
           id: true,
@@ -92,11 +96,12 @@ export async function POST(req: NextRequest) {
           session: true,
           role: true,
           password: false,
+          stackId: true
         },
       });
 
       if (!createUser) {
-        throw new ApiError(400, 'Failed to create new user');
+        return NextResponse.json({ success: false, message: 'Failed to create new user' }, { status: 400 });
       }
 
       try {
@@ -107,7 +112,7 @@ export async function POST(req: NextRequest) {
         };
         createAccessToken(payload);
       } catch (error) {
-        throw new ApiError(400, String(error));
+        return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
       }
 
       const token = createAccessToken({
@@ -122,7 +127,7 @@ export async function POST(req: NextRequest) {
           data: { session: token },
         });
       } catch (error) {
-        throw new ApiError(400, String(error));
+        return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
       }
 
       return {
@@ -132,6 +137,7 @@ export async function POST(req: NextRequest) {
         className: createUser.className,
         schoolName: createUser.schoolName,
         role: createUser.role,
+        stackId: createUser.stackId,
         token,
       };
     });
@@ -157,6 +163,6 @@ export async function POST(req: NextRequest) {
     return response;
   } catch (error) {
     console.error('Error at the register user api', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
   }
 }

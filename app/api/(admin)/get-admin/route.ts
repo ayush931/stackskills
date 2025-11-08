@@ -1,6 +1,5 @@
 import { RoleGroups } from "@/middlewares/helper";
 import { getUserFromRequest, withRoleAuth } from "@/middlewares/role";
-import ApiError from "@/utils/apiError";
 import prisma from "@/utils/prismaClient";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -19,7 +18,7 @@ export async function GET(req: NextRequest) {
     // finding the admin through the request
     const admin = getUserFromRequest(req);
     if (!admin) {
-      throw new ApiError(400, 'User not found');
+      return NextResponse.json({ success: false, message: 'Admin not found' }, { status: 400 })
     }
 
     // finding the profile through the admin id
@@ -33,17 +32,18 @@ export async function GET(req: NextRequest) {
         className: true,
         role: true,
         session: true,
-        password: false
+        password: false,
+        stackId: true
       }
     })
 
     if (!adminProfile) {
-      throw new ApiError(400, 'Unable to find the profile');
+      return NextResponse.json({ success: false, message: 'Admin profile not found' }, { status: 400 });
     }
 
     // gives the final response
     return NextResponse.json({ success: true, message: 'User details fetched', data: adminProfile }, { status: 200 });
   } catch (error) {
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

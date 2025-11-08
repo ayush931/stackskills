@@ -1,15 +1,15 @@
+import connectionToDB from "@/database/dbConnection";
+import { RoleGroups } from "@/middlewares/helper";
+import { withRoleAuth } from "@/middlewares/role";
+import Student from "@/schema/student";
+import { NextRequest, NextResponse } from "next/server";
+
 /**
  * Gives the student registration details
  * @param request - Take the input through params using search bar
  * @returns - Return the searched result of students
  */
 
-import connectionToDB from "@/database/dbConnection";
-import { RoleGroups } from "@/middlewares/helper";
-import { withRoleAuth } from "@/middlewares/role";
-import Student from "@/schema/student";
-import ApiError from "@/utils/apiError";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
@@ -51,6 +51,6 @@ export async function GET(request: NextRequest) {
     }, { status: 200 });
   } catch (error) {
     console.error('Error fetching organizations:', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }

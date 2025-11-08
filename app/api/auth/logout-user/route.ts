@@ -1,4 +1,3 @@
-import ApiError from '@/utils/apiError';
 import prisma from '@/utils/prismaClient';
 import { verifyToken } from '@/utils/token';
 import { NextRequest, NextResponse } from 'next/server';
@@ -15,13 +14,13 @@ export async function GET(req: NextRequest) {
     const token = req.cookies.get('token')?.value;
 
     if (!token) {
-      throw new ApiError(400, 'Unauthorized - token is not available')
+      return NextResponse.json({ success: false, message: 'Login again' }, { status: 400 });
     }
 
     const verify = verifyToken(token);
 
     if (!verify) {
-      throw new ApiError(400, 'Unauthorized - Login with correct credentials');
+      return NextResponse.json({ success: false, message: 'Unauthorized - Login with correct credentials' }, { status: 400 })
     }
 
     // deleting the session id from the user
@@ -47,6 +46,6 @@ export async function GET(req: NextRequest) {
     return response;
   } catch (error) {
     console.error('Error in logout api endpoint', error);
-    throw new ApiError(500, String(error));
+    return NextResponse.json({ success: false, message: String(error) }, { status: 500 });
   }
 }
