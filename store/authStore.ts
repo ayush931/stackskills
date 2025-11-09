@@ -7,10 +7,11 @@ interface AuthState {
   role: Role | null;
   phone: string | null;
   userId: string | null;
+  name: string | null;
 }
 
 interface AuthActions {
-  setAuth: (userId: string, phone: string, role: Role) => void;
+  setAuth: (userId: string, phone: string, role: Role, name: string) => void;
   logout: () => void;
   setRole: (role: Role) => void;
 }
@@ -21,18 +22,20 @@ const initialState: AuthState = {
   isLoggedIn: false,
   role: null,
   phone: null,
-  userId: null
+  userId: null,
+  name: null
 }
 
 export const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
       ...initialState,
-      setAuth: (userId, phone, role) => set({
+      setAuth: (userId, phone, role, name) => set({
         isLoggedIn: true,
         userId,
         phone,
-        role
+        role,
+        name
       }),
       logout: () => set(initialState),
       setRole: (role) => set({ role })

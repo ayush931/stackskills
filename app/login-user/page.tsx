@@ -75,7 +75,7 @@ export default function LoginUserPage() {
         });
 
         if (result.data) {
-          setAuth(result.data.id, result.data.phone, result.data.role);
+          setAuth(result.data.id, result.data.phone, result.data.role, result.data.name);
         }
 
         setFormData({

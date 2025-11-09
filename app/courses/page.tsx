@@ -192,11 +192,10 @@ export default function CoursesPage() {
               <Button
                 key={filter.value}
                 variant={selectedFilter === filter.value ? 'default' : 'outline'}
-                className={`${
-                  selectedFilter === filter.value
+                className={`${selectedFilter === filter.value
                     ? 'bg-orange-500 hover:bg-orange-600 text-white'
                     : 'hover:border-orange-500 hover:text-orange-500'
-                }`}
+                  }`}
                 onClick={() => setSelectedFilter(filter.value)}
               >
                 {filter.label}
@@ -218,24 +217,32 @@ export default function CoursesPage() {
                   onMouseLeave={() => setHoveredCourse(null)}
                 >
                   <div className="relative">
-                    <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+                    <div className="h-48 relative overflow-hidden bg-gray-200">
+                      {/* Course Image */}
+                      <Image
+                        src={course.image}
+                        alt={course.title}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
                       <div className={`absolute inset-0 ${course.color} opacity-20`}></div>
                       <div className="absolute top-4 left-4">
                         <div
-                          className={`w-12 h-12 ${course.color} rounded-xl flex items-center justify-center text-white`}
+                          className={`w-12 h-12 ${course.color} rounded-xl flex items-center justify-center text-white shadow-lg backdrop-blur-sm bg-white/10`}
                         >
                           {course.icon}
                         </div>
                       </div>
                       <div className="absolute top-4 right-4">
-                        <Badge className="bg-white text-gray-700">Class {course.grade}</Badge>
+                        <Badge className="bg-white/90 backdrop-blur-sm text-gray-700 shadow-md">Class {course.grade}</Badge>
                       </div>
                       <div className="absolute bottom-4 right-4">
-                        <Badge className={`${course.color} text-white`}>{course.level}</Badge>
+                        <Badge className={`${course.color} text-white shadow-md`}>{course.level}</Badge>
                       </div>
                       {hoveredCourse === course.id && (
-                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                          <Button className="bg-white text-black hover:bg-gray-100">
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center transition-all">
+                          <Button className="bg-white text-black hover:bg-gray-100 shadow-lg">
                             <Play className="w-4 h-4 mr-2" />
                             Preview Course
                           </Button>

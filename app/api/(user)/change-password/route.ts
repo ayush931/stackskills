@@ -43,43 +43,35 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result = await prisma.$transaction(async (tx) => {
-      const dbUser = await tx.user.findUnique({
-        where: { id: user.id },
-        select: { password: true },
-      });
-
-      if (!dbUser) {
-        return NextResponse.json({ success: false, message: 'User not found' }, { status: 400 });
-      }
-
-      const isCurrentPasswordValid = await verifyPassword(password, dbUser.password);
-
-      if (!isCurrentPasswordValid.success || !isCurrentPasswordValid.isMatch) {
-        return NextResponse.json(
-          { success: false, message: 'Current password is incorrect' },
-          { status: 400 }
-        );
-      }
-
-      const hashResult = await hashPassowrd(newPassword);
-
-      if (!hashResult.success || !hashResult.hash) {
-        return NextResponse.json({ success: false, message: hashResult.error }, { status: 400 });
-      }
-
-      await tx.user.update({
-        where: { id: user.id },
-        data: { password: hashResult.hash },
-      });
-
-      return { success: true };
+    const dbUser = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: { password: true },
     });
 
-    if (result instanceof NextResponse) {
-      return result;
+    if (!dbUser) {
+      return NextResponse.json({ success: false, message: 'User not found' }, { status: 400 });
     }
 
+    const isCurrentPasswordValid = await verifyPassword(password, dbUser.password);
+
+    if (!isCurrentPasswordValid.success || !isCurrentPasswordValid.isMatch) {
+      return NextResponse.json(
+        { success: false, message: 'Current password is incorrect' },
+        { status: 400 }
+      );
+    }
+
+    const hashResult = await hashPassowrd(newPassword);
+
+    if (!hashResult.success || !hashResult.hash) {
+      return NextResponse.json({ success: false, message: hashResult.error }, { status: 400 });
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { password: hashResult.hash },
+    });
+    
     return NextResponse.json(
       { success: true, message: 'Password changed successfully' },
       { status: 200 }

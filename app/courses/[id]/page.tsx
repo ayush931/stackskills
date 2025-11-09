@@ -35,6 +35,7 @@ const coursesData = {
     level: 'Beginner',
     color: 'bg-pink-500',
     price: '₹5,000/month',
+    image: 'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=800&h=600&fit=crop',
     description:
       'Learn programming concepts through fun visual blocks and create your own games and animations. Perfect for young learners starting their coding journey.',
     objectives: [
@@ -105,6 +106,7 @@ const coursesData = {
     level: 'Intermediate',
     color: 'bg-blue-500',
     price: '₹5,500/month',
+    image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=600&fit=crop',
     description:
       'Advanced Scratch programming with complex logic, algorithms, and interactive projects designed for intermediate learners.',
     objectives: [
@@ -175,6 +177,7 @@ const coursesData = {
     level: 'Intermediate',
     color: 'bg-green-500',
     price: '₹6,000/month',
+    image: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&h=600&fit=crop',
     description:
       'Learn Python programming from basics to advanced concepts with real-world projects and professional coding practices.',
     objectives: [
@@ -234,6 +237,138 @@ const coursesData = {
       name: 'Anita Patel',
       role: 'Python Expert',
       experience: '12 years in software development',
+    },
+  },
+  '4': {
+    id: 4,
+    title: 'Web Development with HTML, CSS & JavaScript',
+    grade: '9-10',
+    duration: '18 weeks',
+    students: '3,800+',
+    rating: 4.8,
+    level: 'Advanced',
+    color: 'bg-purple-500',
+    price: '₹7,000/month',
+    image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop',
+    description:
+      'Build responsive websites and web applications using modern web technologies. Learn HTML5, CSS3, and JavaScript to create professional web projects.',
+    objectives: [
+      'Master HTML5 semantic elements and structure',
+      'Create responsive designs with CSS3',
+      'Build interactive features with JavaScript',
+      'Understand DOM manipulation and events',
+    ],
+    curriculum: [
+      { week: '1-2', title: 'HTML Fundamentals', topics: ['HTML structure', 'Semantic tags', 'Forms & validation'] },
+      { week: '3-4', title: 'CSS Basics', topics: ['Selectors', 'Box model', 'Flexbox'] },
+      { week: '5-6', title: 'Advanced CSS', topics: ['Grid layout', 'Animations', 'Responsive design'] },
+      { week: '7-8', title: 'JavaScript Basics', topics: ['Variables', 'Functions', 'Arrays & objects'] },
+      { week: '9-10', title: 'DOM Manipulation', topics: ['Selecting elements', 'Event listeners', 'Dynamic content'] },
+      { week: '11-12', title: 'Advanced JavaScript', topics: ['ES6 features', 'Async programming', 'Fetch API'] },
+      { week: '13-15', title: 'Web Projects', topics: ['Portfolio site', 'Interactive apps', 'Web games'] },
+      { week: '16-18', title: 'Final Project', topics: ['Planning', 'Development', 'Deployment'] },
+    ],
+    projects: ['Personal Portfolio', 'Interactive Website', 'Web-based Games', 'Todo Application'],
+    features: [
+      'Modern web development tools',
+      'VS Code setup and extensions',
+      'Live coding sessions',
+      'Certificate upon completion',
+      'Portfolio hosting guidance',
+      'Job-ready skills training',
+    ],
+    instructor: {
+      name: 'Vikram Singh',
+      role: 'Full Stack Developer',
+      experience: '15 years in web development',
+    },
+  },
+  '5': {
+    id: 5,
+    title: 'Robotics & IoT Fundamentals',
+    grade: 'All',
+    duration: '20 weeks',
+    students: '2,100+',
+    rating: 4.7,
+    level: 'Intermediate',
+    color: 'bg-orange-500',
+    price: '₹8,000/month',
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=600&fit=crop',
+    description:
+      'Explore robotics and Internet of Things with hands-on projects using Arduino and real hardware components.',
+    objectives: [
+      'Understand robotics and IoT concepts',
+      'Program Arduino microcontrollers',
+      'Work with sensors and actuators',
+      'Build real-world IoT projects',
+    ],
+    curriculum: [
+      { week: '1-2', title: 'Introduction to Robotics', topics: ['Basic concepts', 'Components overview', 'Safety'] },
+      { week: '3-4', title: 'Arduino Basics', topics: ['Arduino IDE', 'Digital I/O', 'Analog signals'] },
+      { week: '5-6', title: 'Sensors', topics: ['Temperature sensors', 'Motion sensors', 'Light sensors'] },
+      { week: '7-8', title: 'Actuators', topics: ['Motors', 'Servos', 'LEDs'] },
+      { week: '9-10', title: 'IoT Basics', topics: ['Internet connectivity', 'Cloud platforms', 'Data logging'] },
+      { week: '11-13', title: 'Robot Building', topics: ['Chassis design', 'Motor control', 'Navigation'] },
+      { week: '14-16', title: 'Advanced Projects', topics: ['Smart home', 'Weather station', 'Line follower'] },
+      { week: '17-20', title: 'Capstone Project', topics: ['Design', 'Build', 'Test', 'Present'] },
+    ],
+    projects: ['Smart Home System', 'Line Following Robot', 'Weather Station', 'Obstacle Avoiding Robot'],
+    features: [
+      'Arduino kit provided',
+      'Hands-on hardware projects',
+      'Live demonstrations',
+      'Certificate upon completion',
+      'Project showcase opportunity',
+      'Robotics competition prep',
+    ],
+    instructor: {
+      name: 'Dr. Rajesh Mehta',
+      role: 'Robotics Engineer',
+      experience: '18 years in robotics & automation',
+    },
+  },
+  '6': {
+    id: 6,
+    title: 'AI & Machine Learning for Kids',
+    grade: 'All',
+    duration: '16 weeks',
+    students: '1,800+',
+    rating: 4.9,
+    level: 'Advanced',
+    color: 'bg-red-500',
+    price: '₹7,500/month',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop',
+    description:
+      'Introduction to artificial intelligence and machine learning concepts through fun, interactive projects suitable for young learners.',
+    objectives: [
+      'Understand AI and ML fundamentals',
+      'Learn about neural networks',
+      'Build AI-powered applications',
+      'Explore computer vision and NLP',
+    ],
+    curriculum: [
+      { week: '1-2', title: 'AI Basics', topics: ['What is AI?', 'Types of AI', 'Real-world applications'] },
+      { week: '3-4', title: 'Machine Learning Intro', topics: ['Supervised learning', 'Unsupervised learning', 'Training models'] },
+      { week: '5-6', title: 'Neural Networks', topics: ['Perceptrons', 'Layers', 'Activation functions'] },
+      { week: '7-8', title: 'Computer Vision', topics: ['Image recognition', 'Object detection', 'Teachable Machine'] },
+      { week: '9-10', title: 'Natural Language', topics: ['Text classification', 'Sentiment analysis', 'Chatbots'] },
+      { week: '11-12', title: 'ML Tools', topics: ['Scratch ML', 'TensorFlow Playground', 'Google Colab'] },
+      { week: '13-14', title: 'AI Projects', topics: ['Face recognition', 'Voice commands', 'Game AI'] },
+      { week: '15-16', title: 'Final Project', topics: ['AI app development', 'Testing', 'Presentation'] },
+    ],
+    projects: ['Chatbot Creation', 'Image Recognition App', 'Prediction Models', 'Voice-controlled Game'],
+    features: [
+      'No-code ML tools',
+      'Interactive AI demos',
+      'Live expert sessions',
+      'Certificate upon completion',
+      'AI project portfolio',
+      'Future tech exposure',
+    ],
+    instructor: {
+      name: 'Dr. Sneha Gupta',
+      role: 'AI Research Scientist',
+      experience: '10 years in AI/ML research',
     },
   },
 };
@@ -322,13 +457,18 @@ export default async function CoursePreviewPage({ params }: { params: Promise<{ 
             </div>
 
             <div className="relative">
-              <Card className="p-8 bg-white shadow-2xl border-2 border-gray-100">
-                <div
-                  className={`w-full h-48 ${course.color} bg-opacity-20 rounded-lg flex items-center justify-center mb-6`}
-                >
-                  <BookOpen className={`w-24 h-24 ${course.color.replace('bg-', 'text-')}`} />
+              <Card className="p-0 bg-white shadow-2xl border-2 border-gray-100 overflow-hidden">
+                <div className="relative w-full h-64 sm:h-80">
+                  <Image
+                    src={course.image}
+                    alt={course.title}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                  <div className={`absolute inset-0 ${course.color} opacity-10`}></div>
                 </div>
-                <div className="space-y-4">
+                <div className="p-8 space-y-4">
                   <h3 className="text-2xl font-bold text-black mb-4">Course Includes:</h3>
                   {course.features.map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">

@@ -75,6 +75,7 @@ export default function RegisterUserPage() {
     toast({
       title: '⏳ Creating Account...',
       description: 'Please wait while we register your account.',
+      variant: 'loading'
     });
 
     try {
@@ -92,11 +93,12 @@ export default function RegisterUserPage() {
         toast({
           title: '✅ Registration Successful!',
           description: 'Welcome to StackSkills! Redirecting to dashboard...',
+          variant: 'success'
         });
 
         // Set auth state
         if (result.data) {
-          setAuth(result.data.id, result.data.phone, result.data.role);
+          setAuth(result.data.id, result.data.phone, result.data.role, result.data.name);
         }
 
         // Reset form
@@ -111,7 +113,7 @@ export default function RegisterUserPage() {
 
         // Redirect to dashboard after 2 seconds
         setTimeout(() => {
-          router.push('/dashboard');
+          router.push('/');
         }, 2000);
       } else {
         toast({
@@ -128,6 +130,14 @@ export default function RegisterUserPage() {
       });
     } finally {
       setIsSubmitting(false);
+      setFormData({
+        name: '',
+        phone: '',
+        password: '',
+        confirmPassword: '',
+        className: '',
+        schoolName: '',
+      });
     }
   };
 

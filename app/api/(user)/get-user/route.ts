@@ -31,6 +31,8 @@ export async function GET(req: NextRequest) {
         schoolName: true,
         className: true,
         role: true,
+        stackId: true,
+        createdAt: true,
         password: false,
       },
     });

@@ -13,6 +13,7 @@ export interface TokenPayload {
   role: Role;
   iat?: number;
   exp?: number;
+  name: string;
 }
 
 if (!JWT_SECRET) {
@@ -40,11 +41,12 @@ const verifyOptions: jwt.VerifyOptions = {
  * @returns - JWT Token
  */
 
-export function createAccessToken(payload: { id: string; phone: string; role: Role }): string {
+export function createAccessToken(payload: { id: string; phone: string; role: Role, name: string }): string {
   const tokenPayload: TokenPayload = {
     id: payload.id,
     phone: payload.phone,
     role: payload.role,
+    name: payload.name
   };
   return jwt.sign(tokenPayload, JWT_SECRET, signOptions);
 }
