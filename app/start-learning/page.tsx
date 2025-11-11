@@ -118,7 +118,7 @@ export default function StartLearningPage() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch('/api/register-course', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
