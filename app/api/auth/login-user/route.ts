@@ -98,7 +98,6 @@ export async function POST(req: NextRequest) {
     const comparePassword = await verifyPassword(password, user.password);
 
     if (!comparePassword.success) {
-      console.error('Password verification failed:', comparePassword.error);
       return NextResponse.json(
         { success: false, message: 'Authentication failed. Please try again.' },
         { status: 400 }
