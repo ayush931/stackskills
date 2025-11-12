@@ -1,14 +1,62 @@
 'use client';
 
-import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Zap, Monitor, Clock, Users, CheckCircle, Star } from 'lucide-react';
+import { BookOpen, Zap, Monitor, Clock, Users, CheckCircle, Star, Lock } from 'lucide-react';
+import { useAuthStore } from '@/store/authStore';
+import { useToast } from '@/hooks/use-toast';
 
 export default function PricingSection() {
   const router = useRouter();
+  const { toast } = useToast();
+  const { isLoggedIn, role } = useAuthStore();
+
+  const handlePurchase = (planName: string, purchaseUrl: string) => {
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      toast({
+        title: 'Authentication Required',
+        description: 'Please login to purchase a plan',
+        variant: 'destructive',
+      });
+      router.push('/login-user');
+      return;
+    }
+
+    // Check if user is ADMIN
+    if (role === 'ADMIN') {
+      toast({
+        title: 'Access Restricted',
+        description: 'Admin accounts cannot purchase plans. Please use a student account.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Check if user is USER (student)
+    if (role === 'USER') {
+      toast({
+        title: 'Redirecting to Payment',
+        description: `Processing ${planName} plan purchase...`,
+        variant: 'success',
+      });
+      
+      // Redirect to payment page
+      window.location.href = purchaseUrl;
+      return;
+    }
+
+    // Fallback for any other case
+    toast({
+      title: 'Error',
+      description: 'Unable to process purchase. Please contact support.',
+      variant: 'destructive',
+    });
+  };
+
+  const isPurchaseDisabled = isLoggedIn && role === 'ADMIN';
 
   return (
     <section id="pricing" className="py-20 bg-gradient-to-br from-orange-50 to-yellow-50">
@@ -19,6 +67,18 @@ export default function PricingSection() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Flexible plans designed to fit every student's learning style and schedule
           </p>
+          
+          {/* Admin Restriction Notice */}
+          {isLoggedIn && role === 'ADMIN' && (
+            <div className="max-w-2xl mx-auto mt-6 p-4 bg-orange-100 border-l-4 border-orange-500 rounded-lg">
+              <div className="flex items-center space-x-2">
+                <Lock className="w-5 h-5 text-orange-600" />
+                <p className="text-orange-800 font-medium">
+                  Admin accounts cannot purchase plans. Student accounts only.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -72,10 +132,29 @@ export default function PricingSection() {
               </div>
 
               <Button
-                onClick={() => router.push('https://payments.cashfree.com/forms?code=stackskills')}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold rounded-xl"
+                onClick={() =>
+                  handlePurchase(
+                    'Self Learning',
+                    'https://payments.cashfree.com/forms?code=stackskills'
+                  )
+                }
+                disabled={isPurchaseDisabled}
+                className={`w-full py-3 text-lg font-semibold rounded-xl transition-all ${
+                  isPurchaseDisabled
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed hover:bg-gray-300'
+                    : 'bg-orange-500 hover:bg-orange-600 text-white'
+                }`}
               >
-                Get Started
+                {isPurchaseDisabled ? (
+                  <>
+                    <Lock className="w-5 h-5 mr-2" />
+                    Admin Restricted
+                  </>
+                ) : !isLoggedIn ? (
+                  'Login to Purchase'
+                ) : (
+                  'Get Started'
+                )}
               </Button>
             </div>
           </Card>
@@ -104,8 +183,8 @@ export default function PricingSection() {
               </div>
 
               <p className="text-gray-300 text-lg">
-                Elevate your brand with 25 design projects per month, premium templates, and
-                priority support. Ideal for rapidly growing businesses.
+                Elevate your learning with live interactive classes, expert teachers, and premium
+                support. Ideal for dedicated learners.
               </p>
 
               <div className="space-y-4">
@@ -135,14 +214,49 @@ export default function PricingSection() {
               </div>
 
               <Button
-                onClick={() => router.push('https://payments.cashfree.com/forms/SSJR_Liveclasses')}
-                className="w-full bg-white hover:bg-gray-100 text-black py-3 text-lg font-semibold rounded-xl"
+                onClick={() =>
+                  handlePurchase(
+                    'Live Classes',
+                    'https://payments.cashfree.com/forms/SSJR_Liveclasses'
+                  )
+                }
+                disabled={isPurchaseDisabled}
+                className={`w-full py-3 text-lg font-semibold rounded-xl transition-all ${
+                  isPurchaseDisabled
+                    ? 'bg-gray-600 text-gray-400 cursor-not-allowed hover:bg-gray-600'
+                    : 'bg-white hover:bg-gray-100 text-black'
+                }`}
               >
-                Start Live Classes
+                {isPurchaseDisabled ? (
+                  <>
+                    <Lock className="w-5 h-5 mr-2" />
+                    Admin Restricted
+                  </>
+                ) : !isLoggedIn ? (
+                  'Login to Purchase'
+                ) : (
+                  'Start Live Classes'
+                )}
               </Button>
             </div>
           </Card>
         </div>
+
+        {/* Additional Information */}
+        {!isLoggedIn && (
+          <div className="max-w-2xl mx-auto mt-8 text-center">
+            <p className="text-gray-600">
+              Don't have an account?{' '}
+              <button
+                onClick={() => router.push('/register-user')}
+                className="text-orange-600 font-semibold hover:text-orange-700 underline"
+              >
+                Register now
+              </button>{' '}
+              to get started with your learning journey!
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

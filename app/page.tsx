@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import WelcomePopup from '@/components/home/WelcomePopup';
 import Navigation from '@/components/home/Navigation';
 import HeroSection from '@/components/home/HeroSection';

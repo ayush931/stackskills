@@ -283,7 +283,7 @@ export default function ViewProfilePage() {
         <Card className="mt-6 shadow-md">
           <CardContent className="pt-6">
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/profile" className="flex-1">
+              <Link href="/edit-profile" className="flex-1">
                 <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
                   <Edit className="w-4 h-4 mr-2" />
                   Edit Profile
