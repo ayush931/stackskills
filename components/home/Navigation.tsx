@@ -43,6 +43,7 @@ export default function Navigation({
       const response = await fetch('/api/auth/logout-user', { method: 'GET' });
       const result = await response.json();
       if (result.success) {
+        useAuthStore.getState().logout()
         logout();
         toast({
           title: 'Logout successfull',

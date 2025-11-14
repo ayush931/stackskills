@@ -1,6 +1,7 @@
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { create } from 'zustand';
 import type { Role } from '@/utils/token';
+import { decryptData, encryptData } from '@/utils/localStorageEncryption';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -41,8 +42,24 @@ export const useAuthStore = create<AuthStore>()(
       setRole: (role) => set({ role })
     }),
     {
-      name: 'auth-storage',
-      storage: createJSONStorage(() => localStorage)
+      name: 'token',
+      storage: {
+        getItem: (name) => {
+          const str = localStorage.getItem(name);
+          if (!str) return null;
+          try {
+            const decrypted = decryptData(str);
+            return JSON.parse(decrypted);
+          } catch (error) {
+            console.log(error)
+          }
+        },
+        setItem: (name, value) => {
+          const encrypted = encryptData(JSON.stringify(value));
+          localStorage.setItem(name, encrypted);
+        },
+        removeItem: (name) => localStorage.removeItem(name)
+      }
     }
   )
 )
