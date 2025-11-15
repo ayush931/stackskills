@@ -5,7 +5,7 @@ import { RoleGroups } from '@/middlewares/helper';
 
 /**
  * Returns the details of the user (individually)
- * @param req - Taking the request, especially the user detailsqj
+ * @param req - Taking the request, especially the user details
  * @returns - Returns the final result of the API
  */
 

@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
       where: { id: user.id },
       data: { password: hashResult.hash },
     });
-    
+
     return NextResponse.json(
       { success: true, message: 'Password changed successfully' },
       { status: 200 }

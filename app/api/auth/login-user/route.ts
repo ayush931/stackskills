@@ -105,10 +105,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (!comparePassword.isMatch) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid credentials' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: 'Invalid credentials' }, { status: 400 });
     }
 
     try {
@@ -116,7 +113,7 @@ export async function POST(req: NextRequest) {
         id: '12345',
         phone: '1234567890',
         role: 'ADMIN' as Role,
-        name: 'ayush'
+        name: 'ayush',
       };
       createAccessToken(payload);
     } catch (error) {
@@ -127,7 +124,7 @@ export async function POST(req: NextRequest) {
       id: user.id,
       phone: user.phone,
       role: user.role,
-      name: user.name
+      name: user.name,
     });
 
     // updating the new token in the session

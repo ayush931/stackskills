@@ -14,11 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
 import { useState } from 'react';
@@ -43,22 +39,21 @@ export default function Navigation({
       const response = await fetch('/api/auth/logout-user', { method: 'GET' });
       const result = await response.json();
       if (result.success) {
-        useAuthStore.getState().logout()
+        useAuthStore.getState().logout();
         logout();
         toast({
           title: 'Logout successfull',
           description: 'Successfully log out from the account',
-          variant: 'success'
-        })
+          variant: 'success',
+        });
         router.push('/');
         return;
-      }
-      else {
+      } else {
         toast({
           title: 'Error',
           description: 'Failed to logout from the account',
-          variant: 'destructive'
-        })
+          variant: 'destructive',
+        });
         return;
       }
     } catch (error) {
@@ -131,9 +126,7 @@ export default function Navigation({
               </DropdownMenu>
             ) : (
               <Link href="/login-user">
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6">
-                  Login
-                </Button>
+                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6">Login</Button>
               </Link>
             )}
           </div>
@@ -213,8 +206,9 @@ export default function Navigation({
                         </div>
                       </div>
                       <ChevronDown
-                        className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${isMobileUserMenuOpen ? 'rotate-180' : ''
-                          }`}
+                        className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                          isMobileUserMenuOpen ? 'rotate-180' : ''
+                        }`}
                       />
                     </button>
                   </CollapsibleTrigger>

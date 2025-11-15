@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
           id: '12345',
           phone: '7070707070',
           role: 'ADMIN' as Role,
-          name: 'ayush'
+          name: 'ayush',
         };
         createAccessToken(payload);
       } catch (error) {
@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
         id: createUser.id,
         phone: createUser.phone,
         role: createUser.role,
-        name: createUser.name
+        name: createUser.name,
       });
 
       try {

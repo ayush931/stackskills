@@ -103,8 +103,8 @@ export default function LoginUserPage() {
       setIsSubmitting(false);
       setFormData({
         phone: '',
-        password: ''
-      })
+        password: '',
+      });
     }
   };
 
@@ -231,6 +231,5 @@ export default function LoginUserPage() {
         </div>
       </div>
     </div>
-
   );
 }

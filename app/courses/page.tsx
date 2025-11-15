@@ -192,10 +192,11 @@ export default function CoursesPage() {
               <Button
                 key={filter.value}
                 variant={selectedFilter === filter.value ? 'default' : 'outline'}
-                className={`${selectedFilter === filter.value
+                className={`${
+                  selectedFilter === filter.value
                     ? 'bg-orange-500 hover:bg-orange-600 text-white'
                     : 'hover:border-orange-500 hover:text-orange-500'
-                  }`}
+                }`}
                 onClick={() => setSelectedFilter(filter.value)}
               >
                 {filter.label}
@@ -235,10 +236,14 @@ export default function CoursesPage() {
                         </div>
                       </div>
                       <div className="absolute top-4 right-4">
-                        <Badge className="bg-white/90 backdrop-blur-sm text-gray-700 shadow-md">Class {course.grade}</Badge>
+                        <Badge className="bg-white/90 backdrop-blur-sm text-gray-700 shadow-md">
+                          Class {course.grade}
+                        </Badge>
                       </div>
                       <div className="absolute bottom-4 right-4">
-                        <Badge className={`${course.color} text-white shadow-md`}>{course.level}</Badge>
+                        <Badge className={`${course.color} text-white shadow-md`}>
+                          {course.level}
+                        </Badge>
                       </div>
                       {hoveredCourse === course.id && (
                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center transition-all">

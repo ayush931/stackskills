@@ -75,7 +75,7 @@ export default function RegisterUserPage() {
     toast({
       title: '⏳ Creating Account...',
       description: 'Please wait while we register your account.',
-      variant: 'loading'
+      variant: 'loading',
     });
 
     try {
@@ -93,7 +93,7 @@ export default function RegisterUserPage() {
         toast({
           title: '✅ Registration Successful!',
           description: 'Welcome to StackSkills! Redirecting to dashboard...',
-          variant: 'success'
+          variant: 'success',
         });
 
         // Set auth state
@@ -320,7 +320,10 @@ export default function RegisterUserPage() {
               {/* Login Link */}
               <p className="text-center text-gray-600 mt-4">
                 Already have an account?{' '}
-                <Link href="/login-user" className="text-orange-600 hover:text-orange-700 font-semibold">
+                <Link
+                  href="/login-user"
+                  className="text-orange-600 hover:text-orange-700 font-semibold"
+                >
                   Login here
                 </Link>
               </p>

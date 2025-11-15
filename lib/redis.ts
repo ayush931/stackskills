@@ -15,11 +15,11 @@ const createRedisClient = () => {
     reconnectOnError: (err) => {
       const targetErrors = ['READONLY', 'ECONNRESET', 'ETIMEDOUT'];
       return targetErrors.some((target) => err.message.includes(target));
-    }
-  })
+    },
+  });
 
   client.on('connect', () => {
-    console.log('Redis connected successfully')
+    console.log('Redis connected successfully');
   });
 
   client.on('error', (err) => {
@@ -46,6 +46,6 @@ if (typeof window === 'undefined') {
     await redis.quit();
     console.log('Redis connection closed');
   });
-};
+}
 
 export default redis;

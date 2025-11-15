@@ -10,5 +10,7 @@ export const REDIS_URL = process.env.REDIS_URL as string;
 
 // Runtime validation for critical secrets
 if (!PASSWORD_PEPPER && process.env.NODE_ENV === 'production') {
-  console.warn('WARNING: PASSWORD_PEPPER is not set in production environment. Using default value is insecure!');
+  console.warn(
+    'WARNING: PASSWORD_PEPPER is not set in production environment. Using default value is insecure!'
+  );
 }

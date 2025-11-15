@@ -42,7 +42,7 @@ export default function PricingSection() {
         description: `Processing ${planName} plan purchase...`,
         variant: 'success',
       });
-      
+
       // Redirect to payment page
       window.location.href = purchaseUrl;
       return;
@@ -67,7 +67,7 @@ export default function PricingSection() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Flexible plans designed to fit every student's learning style and schedule
           </p>
-          
+
           {/* Admin Restriction Notice */}
           {isLoggedIn && role === 'ADMIN' && (
             <div className="max-w-2xl mx-auto mt-6 p-4 bg-orange-100 border-l-4 border-orange-500 rounded-lg">

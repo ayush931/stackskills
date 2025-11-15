@@ -61,10 +61,10 @@ export default function ProfileEditPage() {
   const fetchProfile = async () => {
     try {
       setIsLoading(true);
-      
+
       // Use different API endpoint based on role
       const apiEndpoint = role === 'ADMIN' ? '/api/get-admin' : '/api/get-user';
-      
+
       const response = await fetch(apiEndpoint, {
         method: 'GET',
         headers: {
@@ -352,29 +352,27 @@ export default function ProfileEditPage() {
               {profile?.stackId && (
                 <div className="space-y-2 bg-gray-50 p-4 rounded-lg border-l-4 border-orange-500">
                   <Label className="text-sm font-medium text-gray-600">Stack ID (Read-only)</Label>
-                  <p className="text-lg font-mono font-semibold text-gray-900">
-                    {profile.stackId}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    Your unique identifier cannot be changed
-                  </p>
+                  <p className="text-lg font-mono font-semibold text-gray-900">{profile.stackId}</p>
+                  <p className="text-xs text-gray-500">Your unique identifier cannot be changed</p>
                 </div>
               )}
 
               {/* Role Information */}
               {profile && (
-                <div className={`space-y-2 p-4 rounded-lg border-l-4 ${
-                  profile.role === 'ADMIN' 
-                    ? 'bg-orange-50 border-orange-500' 
-                    : 'bg-blue-50 border-blue-500'
-                }`}>
+                <div
+                  className={`space-y-2 p-4 rounded-lg border-l-4 ${
+                    profile.role === 'ADMIN'
+                      ? 'bg-orange-50 border-orange-500'
+                      : 'bg-blue-50 border-blue-500'
+                  }`}
+                >
                   <Label className="text-sm font-medium text-gray-600">Account Type</Label>
                   <p className="text-lg font-semibold">
                     {profile.role === 'ADMIN' ? '🛡️ Administrator' : '👤 User'}
                   </p>
                   <p className="text-xs text-gray-500">
-                    {profile.role === 'ADMIN' 
-                      ? 'You have full access to the admin dashboard' 
+                    {profile.role === 'ADMIN'
+                      ? 'You have full access to the admin dashboard'
                       : 'Standard user account with access to courses'}
                   </p>
                 </div>

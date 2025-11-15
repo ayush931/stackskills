@@ -181,9 +181,7 @@ export default function ViewProfilePage() {
                     <CardTitle className="text-3xl font-bold text-gray-900">
                       {profile.name}
                     </CardTitle>
-                    <CardDescription className="text-lg mt-1">
-                      Student Profile
-                    </CardDescription>
+                    <CardDescription className="text-lg mt-1">Student Profile</CardDescription>
                   </div>
                   <div className="mt-3 sm:mt-0">
                     <Badge
@@ -290,7 +288,10 @@ export default function ViewProfilePage() {
                 </Button>
               </Link>
               <Link href="/courses" className="flex-1">
-                <Button variant="outline" className="w-full border-orange-500 text-orange-500 hover:bg-orange-50">
+                <Button
+                  variant="outline"
+                  className="w-full border-orange-500 text-orange-500 hover:bg-orange-50"
+                >
                   <BookOpen className="w-4 h-4 mr-2" />
                   Browse Courses
                 </Button>
