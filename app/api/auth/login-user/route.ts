@@ -3,7 +3,6 @@ import prisma from '@/utils/prismaClient';
 import { createAccessToken } from '@/utils/token';
 import { loginUserSchema } from '@/zodValidation';
 import { NextRequest, NextResponse } from 'next/server';
-import type { Role } from '@/utils/token';
 
 /**
  * Log in api endpoint
@@ -106,18 +105,6 @@ export async function POST(req: NextRequest) {
 
     if (!comparePassword.isMatch) {
       return NextResponse.json({ success: false, message: 'Invalid credentials' }, { status: 400 });
-    }
-
-    try {
-      const payload = {
-        id: '12345',
-        phone: '1234567890',
-        role: 'ADMIN' as Role,
-        name: 'ayush',
-      };
-      createAccessToken(payload);
-    } catch (error) {
-      return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
     }
 
     const token = createAccessToken({

@@ -115,7 +115,7 @@ export default function Navigation({
                   )}
                   <DropdownMenuItem onClick={() => router.push('/profile')}>
                     <Settings className="w-4 h-4 mr-2" />
-                    Profile Settings
+                    View Result
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600">

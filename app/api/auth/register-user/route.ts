@@ -3,7 +3,6 @@ import prisma from '@/utils/prismaClient';
 import { createAccessToken } from '@/utils/token';
 import { registerUserSchema } from '@/zodValidation';
 import { NextRequest, NextResponse } from 'next/server';
-import type { Role } from '@/utils/token';
 import { generateUniqueStackId } from '@/utils/generateStackId';
 
 /**
@@ -117,18 +116,6 @@ export async function POST(req: NextRequest) {
           { success: false, message: 'Failed to create new user' },
           { status: 400 }
         );
-      }
-
-      try {
-        const payload = {
-          id: '12345',
-          phone: '7070707070',
-          role: 'ADMIN' as Role,
-          name: 'ayush',
-        };
-        createAccessToken(payload);
-      } catch (error) {
-        return NextResponse.json({ success: false, message: String(error) }, { status: 400 });
       }
 
       const token = createAccessToken({
